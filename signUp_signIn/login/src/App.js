@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState} from 'react';
+import { BrowserRouter , Route ,Routes} from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import './App.css';
 import { ThemeProvider } from "styled-components";
 import DefaultKeyboard from './Components/features/DefaultKeyboard'
 import FooterMenu from './Components/features/FooterMenu'
 import { defaultTheme, themesOptions } from "./style/theme";
 import { GlobalStyles } from "./style/global.js";
 import useLocalPersistState from "./hooks/useLocalPersistState";
+import Auth from './Components/features/Auth'
 import {
   SOUND_MODE,
   soundOptions,
@@ -57,30 +61,35 @@ function App() {
   );
   const [isMusicMode, setIsMusicMode] = useState(false);
   return (
-    <ThemeProvider theme={theme}>
-      <div className='canvas'>
-        <GlobalStyles>
-        </GlobalStyles>
-          <div className="App">
-          <DefaultKeyboard letters={["ص","ض"]} soundMode={soundMode}
-              soundType={soundType}>
-          </DefaultKeyboard> 
-      </div> 
-      </div>
-      <FooterMenu
-            themesOptions={themesOptions}
-            theme={theme}
-            soundMode={soundMode}
-            toggleSoundMode={toggleSoundMode}
-            soundOptions={soundOptions}
-            soundType={soundType}
-            handleSoundTypeChange={handleSoundTypeChange}
-            handleThemeChange={handleThemeChange}
-            toggleFocusedMode={toggleFocusedMode}
-            toggleMusicMode={toggleMusicMode}
-            isFocusedMode={isFocusedMode}
-          ></FooterMenu>
-    </ThemeProvider>
+    // <ThemeProvider theme={theme}>
+    //   <div className='canvas'>
+    //     <GlobalStyles>
+    //     </GlobalStyles>
+    //       <div className="App">
+    //       <DefaultKeyboard letters={["ص","ض"]} soundMode={soundMode}
+    //           soundType={soundType}>
+    //       </DefaultKeyboard> 
+    //   </div> 
+    //   </div>
+    //   <FooterMenu
+    //         themesOptions={themesOptions}
+    //         theme={theme}
+    //         soundMode={soundMode}
+    //         toggleSoundMode={toggleSoundMode}
+    //         soundOptions={soundOptions}
+    //         soundType={soundType}
+    //         handleSoundTypeChange={handleSoundTypeChange}
+    //         handleThemeChange={handleThemeChange}
+    //         toggleFocusedMode={toggleFocusedMode}
+    //         toggleMusicMode={toggleMusicMode}
+    //         isFocusedMode={isFocusedMode}
+    //       ></FooterMenu>
+    // </ThemeProvider>
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Auth />} />
+    </Routes>
+  </BrowserRouter>
     
   );
 }

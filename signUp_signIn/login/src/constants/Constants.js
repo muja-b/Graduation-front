@@ -1,4 +1,4 @@
-const DEFAULT_WORDS_COUNT = 200;
+const DEFAULT_WORDS_COUNT = 5;
 const COUNT_DOWN_90 = 90;
 const COUNT_DOWN_60 = 60;
 const COUNT_DOWN_30 = 30;
@@ -9,8 +9,10 @@ const DEFAULT_DIFFICULTY = "normal";
 const HARD_DIFFICULTY = "hard";
 const RESTART_BUTTON_TOOLTIP_TITLE = "[Tab] + [Enter] to quickly restart";
 const REDO_BUTTON_TOOLTIP_TITLE = "[Tab] + [Space] to quickly redo";
-const RESTART_BUTTON_TOOLTIP_TITLE_WORDSCARD = "[Tab] + [Enter] to quick restart the chapter";
-const SELECT_ONE_OR_MORE_CHAPTERS = "Open to select one or more chapters. Pick the chapters in the typing area."
+const RESTART_BUTTON_TOOLTIP_TITLE_WORDSCARD =
+  "[Tab] + [Enter] to quick restart the chapter";
+const SELECT_ONE_OR_MORE_CHAPTERS =
+  "Open to select one or more chapters. Pick the chapters in the typing area.";
 const RECITE_MODE_TITLE = "hide the word (默写模式)";
 const DEFAULT_DIFFICULTY_TOOLTIP_TITLE =
   "normal mode generates random words from top 1000 most frequently used words in English dataset.";
@@ -56,16 +58,52 @@ const FIFTEEN_SENTENCES_COUNT = 15;
 
 const ENGLISH_SENTENCE_MODE_TOOLTIP_TITLE = "English Sentence Mode";
 const CHINESE_SENTENCE_MODE_TOOLTIP_TITLE = "Chinese Sentence Mode";
-
-const WORDS_CARD_MODE = "Words Card mode, learn something in typing!"
+const ARABIC_LETTERS = [
+  "ا",
+  "ب",
+  "ت",
+  "ث",
+  "ج",
+  "ح",
+  "خ",
+  "د",
+  "ذ",
+  "ر",
+  "ز",
+  "س",
+  "ش",
+  "ص",
+  "ض",
+  "ط",
+  "ظ",
+  "ع",
+  "غ",
+  "ف",
+  "ق",
+  "ک",
+  "ل",
+  "م",
+  "ن",
+  "و",
+  "ه",
+  "ي",
+  "ء",
+  "ؤ",
+  "ى",
+  "ئ",
+];
+const WORDS_CARD_MODE = "Words Card mode, learn something in typing!";
 
 const PACING_CARET = "caret";
 const PACING_PULSE = "pulse";
 
-const PACING_CARET_TOOLTIP = "type the word with a caret \"|\" , character by character.";
-const PACING_PULSE_TOOLTIP = "type the word with a pulse \"____\", this helps improving wpm and your speed typing pace habit.";
+const PACING_CARET_TOOLTIP =
+  'type the word with a caret "|" , character by character.';
+const PACING_PULSE_TOOLTIP =
+  'type the word with a pulse "____", this helps improving wpm and your speed typing pace habit.';
 
 export {
+  ARABIC_LETTERS,
   DEFAULT_WORDS_COUNT,
   DEFAULT_COUNT_DOWN,
   COUNT_DOWN_60,
@@ -111,5 +149,5 @@ export {
   PACING_CARET,
   PACING_PULSE,
   PACING_CARET_TOOLTIP,
-  PACING_PULSE_TOOLTIP
+  PACING_PULSE_TOOLTIP,
 };

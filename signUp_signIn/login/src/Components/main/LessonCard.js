@@ -1,8 +1,28 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 const LessonCard = ({ name, text, image, id }) => {
+  const [user, setUser] = useState([]);
+  useEffect(() => {
+    requestUser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  async function requestUser() {
+    const res = await fetch(`http://localhost:8081/user/${2}`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await res.json();
+    console.log(json);
+    setUser(json);
+  }
+
   let lock =
     "https://cdn.discordapp.com/attachments/900326066852339722/1046413355365187604/unlocked.jpg";
-  if (id >= 1) {
+  if (id > user.progress) {
     lock =
       "https://cdn.discordapp.com/attachments/900326066852339722/1046413355075784834/locked.jpg";
   }
@@ -14,7 +34,7 @@ const LessonCard = ({ name, text, image, id }) => {
     });
   };
 
-  if (id < 1) {
+  if (id <= user.progress) {
     return (
       <Link to={`/details/${id}`} className="card">
         <div>

@@ -11,53 +11,42 @@ import {
   DEFAULT_WORDS_COUNT,
 } from "../constants/Constants";
 import { randomIntFromRange } from "./randomUtils";
-import { VOCAB_DICTIONARIES, DICTIONARY_SOURCE_CATALOG } from "../constants/DictionaryConstants";
+import {
+  VOCAB_DICTIONARIES,
+  DICTIONARY_SOURCE_CATALOG,
+} from "../constants/DictionaryConstants";
 
-const wordsGenerator = (wordsCount, difficulty, languageMode) => {
+const wordsGenerator = (wordsCount, difficulty, languageMode, text) => {
   if (languageMode === ENGLISH_MODE) {
     if (difficulty === DEFAULT_DIFFICULTY) {
-        const EnglishWordList = [];
-        for (let i = 0; i < DEFAULT_WORDS_COUNT; i++) {
-          const rand = randomIntFromRange(0, 550);
-          EnglishWordList.push(COMMON_WORDS[rand]);
-        }
-        return EnglishWordList;
+      const EnglishWordList = [];
+      let x = text.split(" ");
+      for (let i = 0; i < wordsCount; i++) {
+        EnglishWordList.push({
+          key: x[i],
+          val: x[i],
+        });
+      }
+      EnglishWordList.push({
+        key: " ",
+        val: " ",
+      });
+      return EnglishWordList;
     }
-    const randomWordsGenerated = randomWords({ exactly: wordsCount, maxLength: 7 });
+    const randomWordsGenerated = randomWords({
+      exactly: wordsCount,
+      maxLength: 7,
+    });
     const words = [];
     for (let i = 0; i < wordsCount; i++) {
-        words.push({key: randomWordsGenerated[i], val: randomWordsGenerated[i]});
-      }
+      words.push({
+        key: randomWordsGenerated[i],
+        val: randomWordsGenerated[i],
+      });
+    }
     return words;
   }
   return ["something", "went", "wrong"];
-};
-
-const chineseWordsGenerator = ( difficulty, languageMode) => {
-  if (languageMode === CHINESE_MODE) {
-    if (difficulty === DEFAULT_DIFFICULTY){
-      const ChineseWordList = [];
-      for (let i = 0; i < DEFAULT_WORDS_COUNT; i++) {
-        const rand = randomIntFromRange(0, 5000);
-        if (COMMON_CHINESE_WORDS[rand] && COMMON_CHINESE_WORDS[rand].val){
-          ChineseWordList.push(COMMON_CHINESE_WORDS[rand]);
-        }
-      }
-  
-      return ChineseWordList;
-    }
-
-    const ChineseIdiomsList = [];
-    for (let i = 0; i < DEFAULT_WORDS_COUNT; i++) {
-      const rand = randomIntFromRange(0, 5000);
-      if (COMMON_CHINESE_IDIOMS_WORDS[rand] && COMMON_CHINESE_IDIOMS_WORDS[rand].val){
-        ChineseIdiomsList.push(COMMON_CHINESE_IDIOMS_WORDS[rand]);
-      }
-    }
-
-    return ChineseIdiomsList;
-
-  }
 };
 
 const wordsCardVocabGenerator = (vocabSource, chapter) => {
@@ -69,6 +58,6 @@ const wordsCardVocabGenerator = (vocabSource, chapter) => {
     wordsList.push(VOCAB_DICTIONARIES[vocabSource][i]);
   }
   return wordsList;
-}
+};
 
-export { wordsGenerator, chineseWordsGenerator, wordsCardVocabGenerator};
+export { wordsGenerator, wordsCardVocabGenerator };

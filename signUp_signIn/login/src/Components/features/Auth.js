@@ -3,6 +3,7 @@ import { Navigate, redirect, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SearchParams from "../main/SearchParams";
 import Details from "../main/Details";
+import App from "../../App.css";
 
 export default function (props) {
   let [authMode, setAuthMode] = useState("signin");
@@ -19,9 +20,6 @@ export default function (props) {
   const emailinputRefsignup = useRef(null);
   const passwordinputRefsignup = useRef(null);
   const navigate = useNavigate();
-  if (10 > 9) {
-    navigate("/main", { replace: true });
-  }
   const handleClick = async () => {
     try {
       const response = await fetch(

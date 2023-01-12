@@ -1,20 +1,19 @@
 import React from "react";
-import { useRef, useEffect, useState ,keyboardRef} from "react";
+import { useRef, useEffect, useState, keyboardRef } from "react";
 import { Box } from "@mui/system";
 import IconButton from "../utils/IconButton";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import useSound from "use-sound";
 import { SOUND_MAP } from "../features/sound/sound";
-import  '../../style/global';
-import  '../../style/theme';
+import Header from "../main/Header";
 
-const DefaultKeyboard = ({letters,soundType, soundMode}) => {
+const DefaultKeyboard = ({ letters, soundType, soundMode }) => {
   const keyboardRef = useRef();
   const [inputChar, setInputChar] = useState("");
-  const [keys,setKeys]=useState("");
+  const [keys, setKeys] = useState("");
   const [correctCount, setCorrectCount] = useState(0);
   const [incorrectCount, setIncorrectCount] = useState(0);
-  const [play] = useSound(SOUND_MAP[soundType], {volume: 0.5});
+  const [play] = useSound(SOUND_MAP[soundType], { volume: 0.5 });
 
   const accuracy =
     correctCount + incorrectCount === 0
@@ -24,7 +23,7 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
     setCorrectCount(0);
     setIncorrectCount(0);
   };
-  
+
   useEffect(() => {
     keyboardRef.current && keyboardRef.current.focus();
   });
@@ -33,7 +32,7 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
     keyboardRef.current && keyboardRef.current.focus();
   };
   const handleKeyDown = (event) => {
-    if (soundMode){
+    if (soundMode) {
       play();
     }
     setInputChar(event.key);
@@ -90,6 +89,7 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
 
   return (
     <div>
+      <Header></Header>
       <div className="keyboard">
         <input
           className="hidden-input"
@@ -129,11 +129,16 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
           <div className={getClassName("7")} id="7">
             7
           </div>
-          <div className={getClassName("8")} id="8">8
+          <div className={getClassName("8")} id="8">
+            8
           </div>
-          <div className={getClassName("9")}id="9">9</div>
-          <div className={getClassName("0")}id="0">0</div>
-          </ul>
+          <div className={getClassName("9")} id="9">
+            9
+          </div>
+          <div className={getClassName("0")} id="0">
+            0
+          </div>
+        </ul>
         <ul className="row row-1">
           <div className={getClassName("ض")} id="ض">
             ض
@@ -165,9 +170,12 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
           <div className={getClassName("ح")} id="ح">
             ح
           </div>
-          <div className={getClassName("ج")} id="ج">ج
+          <div className={getClassName("ج")} id="ج">
+            ج
           </div>
-          <div className={getClassName("د")}id="د">د</div>
+          <div className={getClassName("د")} id="د">
+            د
+          </div>
         </ul>
         <ul className="row row-2">
           <div className={getClassName("ش")} id="ش">
@@ -197,8 +205,12 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
           <div className={getClassName("م")} id="م">
             م
           </div>
-          <div className={getClassName("ك")}id="ك">ك</div>
-          <div className={getClassName("ط")}id="ط">ط</div>
+          <div className={getClassName("ك")} id="ك">
+            ك
+          </div>
+          <div className={getClassName("ط")} id="ط">
+            ط
+          </div>
         </ul>
         <ul className="row row-3">
           <div className={getClassName("ئ")} id="ئ">
@@ -222,9 +234,15 @@ const DefaultKeyboard = ({letters,soundType, soundMode}) => {
           <div className={getClassName("ة")} id="ة">
             ة
           </div>
-          <div className={getClassName("و")}id="و">و</div>
-          <div className={getClassName("ز")}id="ز">ز</div>
-          <div className={getClassName("ظ")}id="ظ">ظ</div>
+          <div className={getClassName("و")} id="و">
+            و
+          </div>
+          <div className={getClassName("ز")} id="ز">
+            ز
+          </div>
+          <div className={getClassName("ظ")} id="ظ">
+            ظ
+          </div>
         </ul>
         <ul className="row row-4">
           <div className={getSpaceKeyClassName()} id="SPACE">

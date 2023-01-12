@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { useParams } from "react-router-dom";
-
+import "../../style.css";
+import Lesson from "./Lesson";
 class Details extends Component {
   constructor(props) {
     super(props);
@@ -21,17 +22,8 @@ class Details extends Component {
     }
 
     const { id, image, text, name } = this.state;
-
-    return (
-      <div className="details">
-        <div>
-          <h1>this lesson is:{name}</h1>
-          <h2>{text}</h2>
-          <button>Start: {name}</button>
-          <p>{image}</p>
-        </div>
-      </div>
-    );
+    let length = text.split(" ").length;
+    return <Lesson text={text} wordCount={length} id={id} name={name} />;
   }
 }
 

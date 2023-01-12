@@ -21,15 +21,12 @@ import {
   COUNT_DOWN_60,
   COUNT_DOWN_30,
   COUNT_DOWN_15,
-  DEFAULT_WORDS_COUNT,
   DEFAULT_DIFFICULTY,
   HARD_DIFFICULTY,
   DEFAULT_DIFFICULTY_TOOLTIP_TITLE,
   HARD_DIFFICULTY_TOOLTIP_TITLE,
   ENGLISH_MODE,
-  CHINESE_MODE,
   ENGLISH_MODE_TOOLTIP_TITLE,
-  CHINESE_MODE_TOOLTIP_TITLE,
   DEFAULT_DIFFICULTY_TOOLTIP_TITLE_CHINESE,
   HARD_DIFFICULTY_TOOLTIP_TITLE_CHINESE,
   RESTART_BUTTON_TOOLTIP_TITLE,
@@ -40,16 +37,20 @@ import {
   PACING_PULSE_TOOLTIP,
 } from "../../../constants/Constants";
 import { SOUND_MAP } from "../sound/sound";
-
+import WinBox from "../../main/WinBox";
 const TypeBox = ({
   textInputRef,
   isFocusedMode,
   soundMode,
   soundType,
   handleInputFocus,
+  text,
+  wordCount,
+  id,
 }) => {
   const [play] = useSound(SOUND_MAP[soundType], { volume: 0.5 });
-
+  let DEFAULT_WORDS_COUNT = wordCount;
+  let KEY_IMG = "space";
   // local persist timer
   const [countDownConstant, setCountDownConstant] = useLocalPersistState(
     DEFAULT_COUNT_DOWN,
@@ -103,10 +104,12 @@ const TypeBox = ({
   // set up words state
   const [wordsDict, setWordsDict] = useState(() => {
     if (language === ENGLISH_MODE) {
-      return wordsGenerator(DEFAULT_WORDS_COUNT, difficulty, ENGLISH_MODE);
-    }
-    if (language === CHINESE_MODE) {
-      return chineseWordsGenerator(difficulty, CHINESE_MODE);
+      return wordsGenerator(
+        DEFAULT_WORDS_COUNT,
+        difficulty,
+        ENGLISH_MODE,
+        text
+      );
     }
   });
 
@@ -126,6 +129,7 @@ const TypeBox = ({
     [words]
   );
 
+  const [winBox, setWinBox] = useState(false);
   // set up timer state
   const [countDown, setCountDown] = useState(countDownConstant);
   const [intervalId, setIntervalId] = useState(null);
@@ -159,24 +163,13 @@ const TypeBox = ({
   const [history, setHistory] = useState({});
   const keyString = currWordIndex + "." + currCharIndex;
   const [currChar, setCurrChar] = useState("");
+  const [KeyImg, setKeyImg] = useState({});
 
   useEffect(() => {
-    if (currWordIndex === DEFAULT_WORDS_COUNT - 1) {
-      if (language === ENGLISH_MODE) {
-        const generatedEng = wordsGenerator(
-          DEFAULT_WORDS_COUNT,
-          difficulty,
-          ENGLISH_MODE
-        );
-        setWordsDict((currentArray) => [...currentArray, ...generatedEng]);
-      }
-      if (language === CHINESE_MODE) {
-        const generatedChinese = chineseWordsGenerator(
-          difficulty,
-          CHINESE_MODE
-        );
-        setWordsDict((currentArray) => [...currentArray, ...generatedChinese]);
-      }
+    if (currWordIndex === DEFAULT_WORDS_COUNT) {
+      setCountDown(0);
+
+      setStatus("finished");
     }
     if (
       currWordIndex !== 0 &&
@@ -189,14 +182,29 @@ const TypeBox = ({
     }
   }, [currWordIndex, wordSpanRefs, difficulty, language]);
 
+  useEffect(() => {
+    if (words[currWordIndex].lengt < currCharIndex + 1) {
+      KEY_IMG = words[currWordIndex].charAt(currCharIndex + 1);
+    } else if (words[currWordIndex].lengt === currCharIndex + 1) {
+      KEY_IMG = "space";
+    }
+  }, [currChar]);
+
+  function changeKeyImg() {
+    if (words[currWordIndex].length < currCharIndex + 1) {
+      KEY_IMG = words[currWordIndex].charAt(currCharIndex + 1);
+    } else {
+      KEY_IMG = "space";
+    }
+    return KEY_IMG;
+  }
   const reset = (newCountDown, difficulty, language, isRedo) => {
     setStatus("waiting");
     if (!isRedo) {
-      if (language === CHINESE_MODE) {
-        setWordsDict(chineseWordsGenerator(difficulty, language));
-      }
       if (language === ENGLISH_MODE) {
-        setWordsDict(wordsGenerator(DEFAULT_WORDS_COUNT, difficulty, language));
+        setWordsDict(
+          wordsGenerator(DEFAULT_WORDS_COUNT, difficulty, language, text)
+        );
       }
     }
     setCountDownConstant(newCountDown);
@@ -285,6 +293,10 @@ const TypeBox = ({
               currCharAdvancedCount,
               currCharExtraCount,
             ]);
+
+            if (accuracy === 100) {
+              setWinBox(true);
+            }
 
             checkPrev();
             setStatus("finished");
@@ -375,6 +387,7 @@ const TypeBox = ({
         // advance to next
         setCurrWordIndex(currWordIndex + 1);
         setCurrCharIndex(-1);
+
         return;
       } else {
         // but don't allow entire word skip
@@ -504,42 +517,6 @@ const TypeBox = ({
     }
   };
 
-  const getChineseWordKeyClassName = (wordIdx) => {
-    if (wordsInCorrect.has(wordIdx)) {
-      if (currWordIndex === wordIdx) {
-        return "chinese-word-key error-chinese active-chinese";
-      }
-      return "chinese-word-key error-chinese";
-    } else {
-      if (currWordIndex === wordIdx) {
-        return "chinese-word-key active-chinese";
-      }
-      return "chinese-word-key";
-    }
-  };
-
-  const getChineseWordClassName = (wordIdx) => {
-    if (wordsInCorrect.has(wordIdx)) {
-      if (currWordIndex === wordIdx) {
-        if (pacingStyle === PACING_PULSE) {
-          return "chinese-word error-word active-word";
-        } else {
-          return "chinese-word error-word active-word-no-pulse";
-        }
-      }
-      return "chinese-word error-word";
-    } else {
-      if (currWordIndex === wordIdx) {
-        if (pacingStyle === PACING_PULSE) {
-          return "chinese-word active-word";
-        } else {
-          return "chinese-word active-word-no-pulse";
-        }
-      }
-      return "chinese-word";
-    }
-  };
-
   const getCharClassName = (wordIdx, charIdx, char, word) => {
     const keyString = wordIdx + "." + charIdx;
     if (
@@ -627,6 +604,12 @@ const TypeBox = ({
 
   return (
     <div onClick={handleInputFocus}>
+      <WinBox
+        show={winBox}
+        wpm={Math.round(wpm)}
+        statsCharCount={statsCharCount}
+        id={id}
+      ></WinBox>
       <CapsLockSnackbar open={capsLocked}></CapsLockSnackbar>
       {language === ENGLISH_MODE && (
         <div className="type-box">
@@ -642,40 +625,11 @@ const TypeBox = ({
                     key={"word" + idx}
                     className={getCharClassName(i, idx, char, word)}
                   >
-                    {char}
+                    {char}&zwj;
                   </span>
                 ))}
                 {getExtraCharsDisplay(word, i)}
               </span>
-            ))}
-          </div>
-        </div>
-      )}
-      {language === CHINESE_MODE && (
-        <div className="type-box-chinese">
-          <div className="words">
-            {words.map((word, i) => (
-              <div key={i + "word"}>
-                <span
-                  key={i + "anchor"}
-                  className={getChineseWordKeyClassName(i)}
-                  ref={wordSpanRefs[i]}
-                >
-                  {" "}
-                  {wordsKey[i]}
-                </span>
-                <span key={i + "val"} className={getChineseWordClassName(i)}>
-                  {word.split("").map((char, idx) => (
-                    <span
-                      key={"word" + idx}
-                      className={getCharClassName(i, idx, char, word)}
-                    >
-                      {char}
-                    </span>
-                  ))}
-                  {getExtraCharsDisplay(word, i)}
-                </span>
-              </div>
             ))}
           </div>
         </div>
@@ -819,17 +773,6 @@ const TypeBox = ({
                     </span>
                   </Tooltip>
                 </IconButton>
-                <IconButton
-                  onClick={() => {
-                    reset(countDownConstant, difficulty, CHINESE_MODE, false);
-                  }}
-                >
-                  <Tooltip title={CHINESE_MODE_TOOLTIP_TITLE}>
-                    <span className={getLanguageButtonClassName(CHINESE_MODE)}>
-                      chn
-                    </span>
-                  </Tooltip>
-                </IconButton>
               </Box>
             )}
             {menuEnabled && (
@@ -863,6 +806,19 @@ const TypeBox = ({
               </Box>
             )}
           </Grid>
+        </div>
+        <div className="keyboard-img">
+          <img
+            src={
+              process.env.PUBLIC_URL +
+              `/image/${
+                words[currWordIndex].length > currCharIndex + 1
+                  ? words[currWordIndex].charAt(currCharIndex + 1)
+                  : "space"
+              }.png`
+            }
+            alt="key"
+          />
         </div>
       </div>
       <input

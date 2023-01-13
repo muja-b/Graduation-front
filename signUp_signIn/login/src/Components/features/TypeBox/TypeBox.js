@@ -47,7 +47,22 @@ const TypeBox = ({
   text,
   wordCount,
   id,
+  mode,
 }) => {
+  const [scrollY, setScrollY] = useState(0);
+  var Scroll = require("react-scroll");
+  var scroll = Scroll.animateScroll;
+  useEffect(() => {
+    setScrollY(window.scrollto);
+    return () => {
+      setScrollY(window.scrollY);
+    };
+  }, []);
+
+  useEffect(() => {
+    scroll.scrollToTop();
+  }, []);
+
   const [play] = useSound(SOUND_MAP[soundType], { volume: 0.5 });
   let DEFAULT_WORDS_COUNT = wordCount;
   let KEY_IMG = "space";
@@ -165,6 +180,16 @@ const TypeBox = ({
   const [currChar, setCurrChar] = useState("");
   const [KeyImg, setKeyImg] = useState({});
 
+  async function addAttempt() {
+    const res = await fetch(`http://localhost:8081/com/${id}`, {
+      method: "PATCH",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await res.json();
+  }
   useEffect(() => {
     if (currWordIndex === DEFAULT_WORDS_COUNT) {
       setCountDown(0);
@@ -295,7 +320,12 @@ const TypeBox = ({
             ]);
 
             if (accuracy === 100) {
-              setWinBox(true);
+              if (mode === 1) {
+                setWinBox(true);
+              }
+            }
+            if (mode === 2) {
+              addAttempt();
             }
 
             checkPrev();
@@ -318,13 +348,16 @@ const TypeBox = ({
     setCurrInput(e.target.value);
     inputWordsHistory[currWordIndex] = e.target.value.trim();
     setInputWordsHistory(inputWordsHistory);
+    window.scrollTo(0, 0);
   };
 
   const handleKeyUp = (e) => {
+    window.scrollTo(0, 0);
     setCapsLocked(e.getModifierState("CapsLock"));
   };
 
   const handleKeyDown = (e) => {
+    window.scrollTo(0, 0);
     if (status !== "finished" && soundMode) {
       play();
     }
@@ -421,6 +454,7 @@ const TypeBox = ({
       setCurrCharIndex(currCharIndex + 1);
       setCurrChar(key);
       return;
+
       // if (keyCode >= 65 && keyCode <= 90) {
       //   setCurrCharIndex(currCharIndex + 1);
       //   setCurrChar(key);
@@ -625,7 +659,7 @@ const TypeBox = ({
                     key={"word" + idx}
                     className={getCharClassName(i, idx, char, word)}
                   >
-                    {char}&zwj;
+                    {char}
                   </span>
                 ))}
                 {getExtraCharsDisplay(word, i)}
@@ -711,70 +745,7 @@ const TypeBox = ({
                 </>
               )}
             </Box>
-            {menuEnabled && (
-              <Box display="flex" flexDirection="row">
-                <IconButton
-                  onClick={() => {
-                    reset(
-                      countDownConstant,
-                      DEFAULT_DIFFICULTY,
-                      language,
-                      false
-                    );
-                  }}
-                >
-                  <Tooltip
-                    title={
-                      language === ENGLISH_MODE
-                        ? DEFAULT_DIFFICULTY_TOOLTIP_TITLE
-                        : DEFAULT_DIFFICULTY_TOOLTIP_TITLE_CHINESE
-                    }
-                  >
-                    <span
-                      className={getDifficultyButtonClassName(
-                        DEFAULT_DIFFICULTY
-                      )}
-                    >
-                      {DEFAULT_DIFFICULTY}
-                    </span>
-                  </Tooltip>
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    reset(countDownConstant, HARD_DIFFICULTY, language, false);
-                  }}
-                >
-                  <Tooltip
-                    title={
-                      language === ENGLISH_MODE
-                        ? HARD_DIFFICULTY_TOOLTIP_TITLE
-                        : HARD_DIFFICULTY_TOOLTIP_TITLE_CHINESE
-                    }
-                  >
-                    <span
-                      className={getDifficultyButtonClassName(HARD_DIFFICULTY)}
-                    >
-                      {HARD_DIFFICULTY}
-                    </span>
-                  </Tooltip>
-                </IconButton>
-                <IconButton>
-                  {" "}
-                  <span className="menu-separator"> | </span>{" "}
-                </IconButton>
-                <IconButton
-                  onClick={() => {
-                    reset(countDownConstant, difficulty, ENGLISH_MODE, false);
-                  }}
-                >
-                  <Tooltip title={ENGLISH_MODE_TOOLTIP_TITLE}>
-                    <span className={getLanguageButtonClassName(ENGLISH_MODE)}>
-                      eng
-                    </span>
-                  </Tooltip>
-                </IconButton>
-              </Box>
-            )}
+
             {menuEnabled && (
               <Box display="flex" flexDirection="row">
                 <IconButton
@@ -809,6 +780,7 @@ const TypeBox = ({
         </div>
         <div className="keyboard-img">
           <img
+            style={{ width: "800px" }}
             src={
               process.env.PUBLIC_URL +
               `/image/${

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -25,6 +25,7 @@ import { ARABIC_LETTERS } from "./constants/Constants";
 import User from "./Components/main/User";
 import Header from "./Components/main/Header";
 import Rooms from "./Components/features/community/Rooms";
+import RoomContent from "./Components/features/community/RoomContent";
 function App() {
   const [theme, setTheme] = useState(() => {
     const stickyTheme = window.localStorage.getItem("theme");
@@ -72,12 +73,13 @@ function App() {
     localStorage.getItem("focused-mode") === "true"
   );
   const [isMusicMode, setIsMusicMode] = useState(false);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Auth />} />
         <Route path="/details/:id" element={<Details />} />
-        <Route path="/main" element={<SearchParams />} />
+        <Route path="/lessons" element={<SearchParams />} />
         <Route
           path="/keyboard"
           element={
@@ -92,6 +94,7 @@ function App() {
 
         <Route path="/User/:id" element={<User />}></Route>
         <Route path="/rooms" element={<Rooms />}></Route>
+        <Route path="/room/:id" element={<RoomContent />} />
       </Routes>
     </BrowserRouter>
   );

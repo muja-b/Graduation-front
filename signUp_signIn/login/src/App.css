@@ -1,6 +1,7 @@
 .App {
   background-color: white;
   background-image: "D:\BG\wp4718605-aesthetic-minimalistic-wallpapers.png";
+  overflow-anchor: none;
 }
 
 .Auth-form-container {
@@ -10,6 +11,7 @@
   width: 100vw;
   height: 100vh;
   background-image: url("https://wallpapercave.com/wp/wp4718605.png");
+  
 }
 
 .Auth-form {

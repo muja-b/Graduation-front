@@ -2,7 +2,7 @@ import RoomCard from "./RoomCard";
 
 const RoomResults = ({ lessons }) => {
   return (
-    <div>
+    <div style={{ top: "200px" }}>
       {lessons.map((lesson) => (
         <RoomCard
           key={lesson.id}

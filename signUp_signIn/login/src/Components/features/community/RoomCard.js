@@ -20,11 +20,14 @@ const RoomCard = ({ name, text, id, ownerId, ownerName }) => {
           <tr style={{}}>
             <th style={{ textDecoration: "none" }}>
               {" "}
-              <Link style={{ textDecoration: "none" }} to={`/user/${ownerId}`}>
-                صاحب الدرس:{ownerName}
+              <Link
+                style={{ textDecoration: "none", marginLeft: "10px" }}
+                to={`/user/${ownerId}`}
+              >
+                {ownerName}
               </Link>
             </th>
-            <th style={{ position: "absolute", right: "400px" }}>
+            <th style={{ position: "absolute", right: "120px" }}>
               <th>{name}</th>
               <th>{":" + ConvertToArabicNumbers(id)}</th>
             </th>

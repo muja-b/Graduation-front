@@ -1,7 +1,7 @@
 const lightTheme = {
   label: "Light",
   background: "#F5F5F5",
-  text: "#000000",
+  text: "green",
   gradient: "linear-gradient(315deg, #74ebd5 0%, #ACB6E5 94%)",
   title: "#2979ff",
   textTypeBox: "#9E9E9E",

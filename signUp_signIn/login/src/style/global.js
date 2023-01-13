@@ -139,7 +139,9 @@ export const GlobalStyles = createGlobalStyle`
     left: 0px;
     width: 100%;
     z-index: 10;
-  }.dialog {
+  }
+  .dialog {
+    z-index: 11;
   --tw-bg-opacity: 1;
   background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
   border-radius: 0.75rem;
@@ -273,7 +275,7 @@ export const GlobalStyles = createGlobalStyle`
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
-    position: relative
+    position: relative;
     top: 10%;
     @media only screen 
     and (min-device-width: 375px) 
@@ -296,9 +298,9 @@ export const GlobalStyles = createGlobalStyle`
     overflow: hidden;
     margin-left: auto;
     margin-right: auto;
-    position: relative
+    position: relative;
     top: 10%;
-    right:50px;
+    postion:center:
   }
   .type-box-chinese {
     display: block;
@@ -329,11 +331,8 @@ export const GlobalStyles = createGlobalStyle`
   }
   .word{
     margin: 5px 5px;
-    display: flex;
-    flex-direction: row-reverse;
+
     padding-right: 2px;
-    border-bottom: 1px solid transparent;
-    border-top: 1px solid transparent;
     scroll-margin: 4px;
   }
   .active-word{
@@ -359,17 +358,13 @@ export const GlobalStyles = createGlobalStyle`
     scroll-margin: 4px;
   }
   .char{
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+    
   }
   .correct-char{
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
     color: ${({ theme }) => theme.text};
   }
   .error-char{
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
+    
     color: red;
   }
   .caret-char-left{

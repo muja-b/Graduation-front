@@ -13,7 +13,7 @@ import useLocalPersistState from "../../hooks/useLocalPersistState";
 import TypeBox from "../features/TypeBox/TypeBox.js";
 import Header from "./Header.js";
 // import "../../../src/App.css";
-const Lesson = ({ text, wordCount, id, name }) => {
+const Lesson = ({ text, wordCount, id, name, mode }) => {
   const [theme, setTheme] = useState(() => {
     const stickyTheme = window.localStorage.getItem("theme");
     if (stickyTheme !== null) {
@@ -78,6 +78,7 @@ const Lesson = ({ text, wordCount, id, name }) => {
             id={id}
             name={name}
             handleInputFocus={() => focusTextInput()}
+            mode={mode}
           ></TypeBox>
         </div>
       </div>

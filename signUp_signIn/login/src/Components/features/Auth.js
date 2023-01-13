@@ -35,6 +35,7 @@ export default function (props) {
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
+      localStorage.setItem("token",JSON.stringify(result,null,4))
 
       const result = await response.json();
 
@@ -58,7 +59,7 @@ export default function (props) {
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
-
+      localStorage.setItem("token",JSON.stringify(result,null,4))
       const result = await response.json();
 
       console.log('result is: ', JSON.stringify(result, null, 4));

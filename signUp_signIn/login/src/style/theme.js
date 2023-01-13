@@ -1,14 +1,13 @@
 const lightTheme = {
   label: "Light",
   background: "#F5F5F5",
-  text: "#000000",
+  text: "green",
   gradient: "linear-gradient(315deg, #74ebd5 0%, #ACB6E5 94%)",
   title: "#2979ff",
   textTypeBox: "#9E9E9E",
   stats: "#3D5AFE",
   fontFamily: "sans-serif",
 };
-
 const darkTheme = {
   label: "Dark",
   background: "#121212",
@@ -118,7 +117,7 @@ const aluminiumTheme = {
   textTypeBox: "#FAF9F6",
   stats: "#2D3436",
   fontFamily: "Rufina",
-  textShadow: "0px -1px 0px rgba(0,0,0,0.3)"
+  textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
 
 const pianoTheme = {
@@ -130,7 +129,7 @@ const pianoTheme = {
   textTypeBox: "#555",
   stats: "#FAF9F6",
   fontFamily: "Rufina",
-  textShadow: "0px -1px 0px rgba(0,0,0,0.3)"
+  textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
 
 const coolKidTheme = {
@@ -142,7 +141,7 @@ const coolKidTheme = {
   textTypeBox: "#090261",
   stats: "#EA00BA",
   fontFamily: "Tomorrow",
-  textShadow: "0px -1px 0px rgba(0,0,0,0.3)"
+  textShadow: "0px -1px 0px rgba(0,0,0,0.3)",
 };
 
 const edgeRunnerTheme = {
@@ -154,7 +153,7 @@ const edgeRunnerTheme = {
   textTypeBox: "#D1C5C0",
   stats: "#FE00FE",
   fontFamily: "Tomorrow",
-  textShadow: "0 0 2vw #E7E7E3"
+  textShadow: "0 0 2vw #E7E7E3",
 };
 
 const defaultTheme = darkTheme;
@@ -173,7 +172,7 @@ const themesOptions = [
   { value: heroTheme, label: "Hero" },
   { value: coolKidTheme, label: "Cool Kid" },
   { value: budapestTheme, label: "Budapest" },
-  { value: lightTheme, label: "Light" }
+  { value: lightTheme, label: "Light" },
 ];
 
 export {
@@ -192,5 +191,5 @@ export {
   pianoTheme,
   defaultTheme,
   themesOptions,
-  edgeRunnerTheme
+  edgeRunnerTheme,
 };

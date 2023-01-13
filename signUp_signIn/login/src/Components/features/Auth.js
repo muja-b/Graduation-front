@@ -1,19 +1,20 @@
-import React, { useState ,useRef} from "react"
-import { Navigate, redirect } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { Navigate, redirect, Route, Routes } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import SearchParams from "../main/SearchParams";
+import Details from "../main/Details";
+import App from "../../App.css";
 
 export default function (props) {
-  let [authMode, setAuthMode] = useState("signin")
-
+  let [authMode, setAuthMode] = useState("signin");
   const changeAuthMode = () => {
-    setAuthMode(authMode === "signin" ? "signup" : "signin")
-    emailinputRef.current.value=""
-    passwordinputRef.current.value=""
-    emailinputRefsignup.current.value=""
-    passwordinputRefsignup.current.value=""
-    
-  }
-  const [err, setErr] = useState('');
+    setAuthMode(authMode === "signin" ? "signup" : "signin");
+    emailinputRef.current.value = "";
+    passwordinputRef.current.value = "";
+    emailinputRefsignup.current.value = "";
+    passwordinputRefsignup.current.value = "";
+  };
+  const [err, setErr] = useState("");
   const emailinputRef = useRef(null);
   const passwordinputRef = useRef(null);
   const emailinputRefsignup = useRef(null);
@@ -21,17 +22,20 @@ export default function (props) {
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
-      const response = await fetch('https://localhost:7097/TouchTyping/Authentication/Login', {
-        method: 'POST',
-        body: JSON.stringify({
-          email: emailinputRef.current.value,
-          password: passwordinputRef.current.value,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+      const response = await fetch(
+        "https://localhost:7097/TouchTyping/Authentication/Login",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: emailinputRef.current.value,
+            password: passwordinputRef.current.value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
@@ -39,32 +43,33 @@ export default function (props) {
 
       const result = await response.json();
 
-      console.log('result is: ', JSON.stringify(result, null, 4));
-    } catch (err) {
-    }
+      console.log("result is: ", JSON.stringify(result, null, 4));
+    } catch (err) {}
   };
   const handleClickSignUp = async () => {
     try {
-      const response = await fetch('https://localhost:7097/TouchTyping/Authentication/SignUp', {
-        method: 'POST',
-        body: JSON.stringify({
-          email: emailinputRefsignup.current.value,
-          password: passwordinputRefsignup.current.value,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+      const response = await fetch(
+        "https://localhost:7097/TouchTyping/Authentication/SignUp",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: emailinputRefsignup.current.value,
+            password: passwordinputRefsignup.current.value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
       }
       localStorage.setItem("token",JSON.stringify(result,null,4))
       const result = await response.json();
 
-      console.log('result is: ', JSON.stringify(result, null, 4));
-    } catch (err) {
-    }
+      console.log("result is: ", JSON.stringify(result, null, 4));
+    } catch (err) {}
   };
 
   if (authMode === "signin") {
@@ -100,7 +105,11 @@ export default function (props) {
               />
             </div>
             <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary" onClick={handleClick}>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                onClick={handleClick}
+              >
                 Submit
               </button>
             </div>
@@ -110,7 +119,7 @@ export default function (props) {
           </div>
         </form>
       </div>
-    )
+    );
   }
 
   return (
@@ -131,7 +140,6 @@ export default function (props) {
               type="text"
               className="form-control mt-1"
               placeholder="e.g Jane Doe"
-              
             />
           </div>
           <div className="form-group mt-3">
@@ -155,7 +163,11 @@ export default function (props) {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary" onClick={handleClickSignUp}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleClickSignUp}
+            >
               Submit
             </button>
           </div>
@@ -165,5 +177,5 @@ export default function (props) {
         </div>
       </form>
     </div>
-  )
+  );
 }

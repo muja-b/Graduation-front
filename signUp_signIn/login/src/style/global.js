@@ -634,6 +634,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .keyboard {
+    margin-top:200px;
     display: flex;
     flex-direction: column;
     align-items: center;

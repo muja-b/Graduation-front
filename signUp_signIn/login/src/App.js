@@ -26,6 +26,8 @@ import User from "./Components/main/User";
 import Header from "./Components/main/Header";
 import Rooms from "./Components/features/community/Rooms";
 import RoomContent from "./Components/features/community/RoomContent";
+import Posts from "./Components/features/Blog/Posts";
+import Chat from "./Components/features/Chat/Chat";
 function App() {
   const [theme, setTheme] = useState(() => {
     const stickyTheme = window.localStorage.getItem("theme");
@@ -95,6 +97,8 @@ function App() {
         <Route path="/User/:id" element={<User />}></Route>
         <Route path="/rooms" element={<Rooms />}></Route>
         <Route path="/room/:id" element={<RoomContent />} />
+        <Route path="/blog" element={<Posts />}></Route>
+        <Route path="/chat" element={<Chat />}></Route>
       </Routes>
     </BrowserRouter>
   );

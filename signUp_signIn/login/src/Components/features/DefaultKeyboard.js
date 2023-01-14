@@ -89,7 +89,6 @@ const DefaultKeyboard = ({ letters, soundType, soundMode }) => {
 
   return (
     <div>
-      <Header></Header>
       <div className="keyboard">
         <input
           className="hidden-input"

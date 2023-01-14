@@ -232,6 +232,47 @@
     box-shadow: 0 16px 32px 0 rgba(0,0,0,0.2);
   }
   
+  .post {
+    text-decoration: none;
+    border-radius: 8px;
+    float:left;
+    width: 800px;
+    height: 400px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row-reverse;
+    margin: 25px;
+    border-bottom: #333 10px inherit;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    transition: 0.3s;
+    background-color: white;
+  }
+
+  .comment {
+    text-decoration: none;
+    border-radius: 8px;
+    float:left;
+    width: 600px;
+    height: 120px;
+    display: flex;
+    overflow: hidden;
+    flex-direction: row-reverse;
+    margin: 25px;
+    border-bottom: #333 10px inherit;
+    box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+    transition: 0.3s;
+    background-color: white;
+  }
+
+.like{
+   width: 20px;
+}
+  .like:hover{
+    cursor: pointer;
+  } 
+  .comments:hover{
+    cursor: pointer;
+  }
   .card {
     text-decoration: none;
     border-radius: 8px;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Header from "../Header";
 import NewRoom from "./NewRoom";
 import RoomResults from "./RoomResults";
 const Rooms = () => {
@@ -26,6 +27,7 @@ const Rooms = () => {
 
   return (
     <div>
+      <Header></Header>
       <NewRoom show={show}></NewRoom>
       <div
         className="search-params"

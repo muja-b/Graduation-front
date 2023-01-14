@@ -5,9 +5,24 @@ const LessonCard = ({ name, text, image, id }) => {
   useEffect(() => {
     requestUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+  async function getuserid(){
+    const res=await fetch("https://localhost:7097/TouchTyping/Authentication/Validate",
+    {
+      method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer '+JSON.parse(localStorage.getItem('token')).token
+        },
+    });
+    const user=await res.json();
+    console.log(user)
+    return user
+  }
   async function requestUser() {
-    const res = await fetch(`http://localhost:8081/user/${2}`, {
+      const user=await getuserid()
+      const userid=user.id
+    const res = await fetch(`http://localhost:8081/user/${userid}`, {
       method: "GET",
       mode: "cors",
       headers: {

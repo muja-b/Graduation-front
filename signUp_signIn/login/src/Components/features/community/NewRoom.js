@@ -1,12 +1,45 @@
 import { Checkbox } from "@mui/material";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const NewRoom = ({ show }) => {
+  const navigate = useNavigate();
+  async function getuserid(){
+    const res=await fetch("https://localhost:7097/TouchTyping/Authentication/Validate",
+    {
+      method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer '+JSON.parse(localStorage.getItem('token')).token
+        },
+    });
+    const user=await res.json();
+    console.log(user)
+    return user
+  }
+    async function getuserinfo(id){
+    const res=await fetch(`http://localhost:8081/user/${id}`,
+    {
+      method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+    });
+    const user=await res.json();
+    console.log(user)
+    return user
+  }
   async function addRoom() {
+    const user=await getuserid()
+    const userid=user.id
+    const userinfo=await getuserinfo(userid)
+    const fullName=userinfo.firstName+" "+userinfo.lastName;
     let name = document.getElementById("name").value;
     let text = document.getElementById("text").value;
     let pub = document.getElementById("pub").value;
     const res = await fetch(
-      `http://localhost:8081/com/add?name=${name}&text=${text}&ownerId=2&pub=${pub}&ownerName=يزن شتيه`,
+      `http://localhost:8081/com/add?name=${name}&text=${text}&ownerId=${userid}&pub=${pub}&ownerName=${fullName}`,
       {
         method: "PUT",
         mode: "cors",
@@ -14,8 +47,10 @@ const NewRoom = ({ show }) => {
           "Content-Type": "application/json",
         },
       }
-    );
+      );
+    
     const json = await res.json();
+    window.location.replace("http://localhost:3000/rooms");
   }
 
   if (show === false) {
@@ -77,7 +112,6 @@ const NewRoom = ({ show }) => {
             className="dialog__confirm"
             onClick={() => {
               addRoom();
-              window.location.replace("http://localhost:3000/rooms");
             }}
           >
             تخزين

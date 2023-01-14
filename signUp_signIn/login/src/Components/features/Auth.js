@@ -1,60 +1,71 @@
-import React, { useState, useRef } from "react";
-import { Navigate, redirect, Route, Routes } from "react-router-dom";
+import React, { useState, useRef,useEffect } from "react";
+import { Navigate, redirect, Route, Routes  } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import SearchParams from "../main/SearchParams";
 import Details from "../main/Details";
 import App from "../../App.css";
+import Lesson from "../main/Lesson";
 
 export default function (props) {
-  let [authMode, setAuthMode] = useState("signin");
+  const [authMode, setAuthMode] = useState("signin");
   const changeAuthMode = () => {
     setAuthMode(authMode === "signin" ? "signup" : "signin");
-    emailinputRef.current.value = "";
-    passwordinputRef.current.value = "";
-    emailinputRefsignup.current.value = "";
-    passwordinputRefsignup.current.value = "";
   };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [fullName, setfullName] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [err, setErr] = useState("");
-  const emailinputRef = useRef(null);
-  const passwordinputRef = useRef(null);
-  const emailinputRefsignup = useRef(null);
-  const passwordinputRefsignup = useRef(null);
   const navigate = useNavigate();
-  const handleClick = async () => {
-    try {
-      const response = await fetch(
-        "https://localhost:7097/TouchTyping/Authentication/Login",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: emailinputRef.current.value,
-            password: passwordinputRef.current.value,
+  const handleClick=async  (e)=>{
+      e.preventDefault();
+      try{
+        const response = await fetch(
+         "https://localhost:7097/TouchTyping/Authentication/Login",
+         {
+           method: "POST",
+           body: JSON.stringify({
+            email,
+             password,
+             
           }),
           headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        }
+             "Content-Type": "application/json",
+           },
+         }
       );
-      if (!response.ok) {
-        throw new Error(`Error! status: ${response.status}`);
-      }
-      localStorage.setItem("token",JSON.stringify(result,null,4))
+       const result =await response.json();
+       if (result.success===false) {
+          navigate('/')
+       }
+       if(result.token){
+        localStorage.setItem("token",JSON.stringify(result))  
+        console.log("result is: ", JSON.stringify(result));
+         setIsLoggedIn(true);
+        //window.location.assign('http://localhost:3000/lessons')
+       } 
+      }  
+     catch (err) {console.log(err)}};
+    useEffect(() => {
+      if (isLoggedIn) {
+      navigate("/lessons");
+    }
+    }, [isLoggedIn]);
 
-      const result = await response.json();
-
-      console.log("result is: ", JSON.stringify(result, null, 4));
-    } catch (err) {}
-  };
-  const handleClickSignUp = async () => {
+  const handleClickSignUp = async (e) => {
+          const firstName=fullName.split(" ")[0];
+          const lastName=fullName.split(" ")[1];
     try {
+      e.preventDefault();
       const response = await fetch(
         "https://localhost:7097/TouchTyping/Authentication/SignUp",
         {
           method: "POST",
           body: JSON.stringify({
-            email: emailinputRefsignup.current.value,
-            password: passwordinputRefsignup.current.value,
+            email: email,
+            password: password,
+            firstName,
+             lastName
           }),
           headers: {
             "Content-Type": "application/json",
@@ -62,11 +73,14 @@ export default function (props) {
           },
         }
       );
+      const result = await response.json();
       if (!response.ok) {
         throw new Error(`Error! status: ${response.status}`);
+      }else{
+        localStorage.setItem("token",JSON.stringify(result,null,4))
+        setIsLoggedIn(true);
       }
-      localStorage.setItem("token",JSON.stringify(result,null,4))
-      const result = await response.json();
+      
 
       console.log("result is: ", JSON.stringify(result, null, 4));
     } catch (err) {}
@@ -91,7 +105,8 @@ export default function (props) {
                 type="email"
                 className="form-control mt-1"
                 placeholder="Enter email"
-                ref={emailinputRef}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group mt-3">
@@ -101,7 +116,8 @@ export default function (props) {
                 type="password"
                 className="form-control mt-1"
                 placeholder="Enter password"
-                ref={passwordinputRef}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="d-grid gap-2 mt-3">
@@ -140,6 +156,8 @@ export default function (props) {
               type="text"
               className="form-control mt-1"
               placeholder="e.g Jane Doe"
+              value={fullName}
+              onChange={(e) => setfullName(e.target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -149,7 +167,8 @@ export default function (props) {
               type="email"
               className="form-control mt-1"
               placeholder="Email Address"
-              ref={emailinputRefsignup}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group mt-3">
@@ -159,7 +178,8 @@ export default function (props) {
               type="password"
               className="form-control mt-1"
               placeholder="Password"
-              ref={passwordinputRefsignup}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <div className="d-grid gap-2 mt-3">

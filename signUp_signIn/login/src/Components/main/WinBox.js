@@ -1,11 +1,29 @@
 import LessonCard from "./LessonCard";
 import { useState, useEffect } from "react";
-const winBox = ({ show, wpm, statsCharCount, id }) => {
+import { useNavigate } from "react-router-dom";
+  
+const WinBox = ({ show, wpm, statsCharCount, id }) => {
+  const navigate = useNavigate();
   // eslint-disable-line react-hooks/exhaustive-deps
-
+  async function getuserid(){
+    const res=await fetch("https://localhost:7097/TouchTyping/Authentication/Validate",
+    {
+      method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': 'Bearer '+JSON.parse(localStorage.getItem('token')).token
+        },
+    });
+    const user=await res.json();
+    console.log(user)
+    return user
+  }
   async function udpateStats() {
+    const user=await getuserid()
+    const userid=user.id
     const res = await fetch(
-      `http://localhost:8081/user/2?wpm=${wpm}&progress=${id + 1}`,
+      `http://localhost:8081/user/${userid}?wpm=${wpm}&progress=${id + 1}`,
       {
         method: "POST",
         mode: "cors",
@@ -52,7 +70,7 @@ const winBox = ({ show, wpm, statsCharCount, id }) => {
             className="dialog__confirm"
             onClick={() => {
               udpateStats();
-              window.location.replace("http://localhost:3000/main");
+              navigate("/lessons");
             }}
           >
             التالي
@@ -71,4 +89,4 @@ const winBox = ({ show, wpm, statsCharCount, id }) => {
     </div>
   );
 };
-export default winBox;
+export default WinBox;

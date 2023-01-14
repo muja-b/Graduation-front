@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Results from "./Results";
-import Header from "./Header";
+import Header from "../features/Header";
 const SearchParams = () => {
   const [lessons, setlessons] = useState([]);
 
@@ -26,6 +26,7 @@ const SearchParams = () => {
 
   return (
     <div>
+      <Header></Header>
       <div className="search-params">
         <Results lessons={lessons} />
       </div>

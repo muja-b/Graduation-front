@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)https://www.typingclub.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="google-site-verification" content="167SVEcWm1Y4Lh_ydR1-WeKcHnRQFnz8ru3HsjVsCSA">
+  <meta name="msvalidate.01" content="A66785572ED9677BE1471D65CF8FA5F8">
+  <meta name="keywords" content="typing, typing tutorial, free touch typing tutorial, touch typing, typing game">
+  <meta name="description" content="Learn touch typing online using TypingClub&#39;s free typing courses. It includes 650 typing games, typing tests and videos.">
+  <meta name="google-site-verification" content="WTROtvgTbu3jrHPl6NvwQM90CAXr3mIQyGuco7An-Kw">
+  <meta property="og:title" content="Free Touch Typing Software">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://www.typingclub.com/">
+  <meta property="og:image" content="http://www.typingclub.com/m/tp/typingclub_logo.png">
+  <meta property="og:site_name" content="TypingClub">
+  <meta property="fb:app_id" content="252994214745609">
+  <title>Learn Touch Typing Free - TypingClub</title>
+
+  <link href="./TypingClub_files/toolkit-startup.min.css" rel="stylesheet">
+  <link href="./TypingClub_files/animate.css" rel="stylesheet">
+  <link href="./TypingClub_files/homepage.css" rel="stylesheet">
+  <script id="twitter-wjs" src="./TypingClub_files/widgets.js.download"></script><script type="text/paperscript" canvas="tpcanvas" style="width:400px;height:400px;" src="./TypingClub_files/tppaper.js.download" data-paper-ignore="true"></script>
+  <link href="./TypingClub_files/css" rel="stylesheet" type="text/css">
+
+
+  <script type="text/javascript" src="./TypingClub_files/paper-full.min.js.download"></script>
+  <script type="text/javascript" src="./TypingClub_files/jquery.min.js.download"></script>
+  <link rel="shortcut icon" type="image/png" href="https://static.typingclub.com/m/corp2/img/favicon.png">
+  
+<script charset="utf-8" src="./TypingClub_files/button.d2f864f87f544dc0c11d7d712a191c1f.js.download"></script></head>
+<body>
+
+
+<div id="message-box" style="display: none; padding: 8px; text-align: center;"></div>
+
+<div class="container" style="
+    background-color: #084f8e;
+    background-image: url(https://wallpapercave.com/wp/wp4718605.png), linear-gradient(0deg, #084f8e, #083466 80%);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;">
+  <canvas id="tpcanvas" resize="" hidpi="off" width="1835" height="100" data-paper-scope="1" style="user-select: none; touch-action: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas>
+  <div>
+    <div id="clouds3" class="clouds" style="top: 887px; background-position-x: 20000px;"></div>
+    <div id="clouds1" class="clouds" style="top: 887px;"></div>
+    <div id="clouds2" class="clouds" style="top: 887px; background-position-x: -20000px;"></div>
+  </div>
+  <div id="nav" class="sticky">
+  </div>
+  <div id="tagline" style="width: 500px;">
+    <h1>تعلم الكتابة باللمس مجانا!</h1>
+    <button class="btn btn-danger btn-lg get-started-btn get_started_x" onclick="location.href='https://google.com';">ابدا</button>
+
+  </div>
+</div>
+<div id="scroll-down-btn">
+      <img src="./TypingClub_files/scroll-arrow.png" width="16px">
+    </div>
+
+<div style="position:absolute; top:100%; padding-top:100px;left:0px;right:0px;" id="hp-spacer">
+
+<script type="text/javascript">
+
+$("#scroll-down-btn").click(function() {
+  $("html,body").animate({scrollTop: $(window).height()}, 700);
+  $("#scroll-down-btn").hide();
+});
+
+
+var scroll_callbacks = [];
+function do_when_scrolling_to(top, callback){
+  scroll_callbacks.push({'top':top, 'callback':callback, 'called':false});
+}
+
+setInterval(function(){
+  var top = $(window).scrollTop();
+  for(var i=0,j=scroll_callbacks.length;i<j;i++){
+    var dta = scroll_callbacks[i];
+    if(dta.called)
+      continue;
+    
+    if(top > dta.top){
+      dta.callback();
+      dta.called = true;
+    }
+  }
+}, 500);
+
+
+$(function(){
+  $("#clouds2").animate({'background-position-x':'-=10000'}, 500000, 'linear').animate({'background-position-x':'-=10000'}, 500000, 'linear');
+  $("#clouds3").animate({'background-position-x':'10000'}, 1000000, 'linear').animate({'background-position-x':'20000'}, 1000000, 'linear');
+
+  resized();
+  show_text(0);
+
+  if (navigator.userAgent.match(/(iPod|iPhone|iPad)/)) {
+    $("#tpcanvas").remove();
+  }
+
+  var homepage_message;
+  try {homepage_message = JSON.parse(localStorage.getItem('homepage-message'))} catch(e) {}
+  if (homepage_message) {
+      $("#message-box").addClass("alert-" + homepage_message.type).html(homepage_message.text).show();
+      localStorage.removeItem('homepage-message');
+  }
+
+  // $(".get_started").click(get_started);
+  // 
+  //   $('<script type="text/javascript" src="//static.typingclub.com/m/build/js/student.js"></sc'+'ript>').appendTo('body');
+  // 
+});
+
+jQuery.extend( jQuery.easing, {
+  def: 'easeOutQuad',
+  easeInOutQuad: function (x, t, b, c, d) {
+    if ((t/=d/2) < 1) return c/2*t*t + b;
+    return -c/2 * ((--t)*(t-2) - 1) + b;
+  }
+});
+
+jQuery.extend( jQuery.easing, {
+  easeInOut: function (x, t, b, c, d) {
+    return jQuery.easing.easeInOutQuad(x, t, b, c, d);
+  }
+});
+
+function get_started(){
+  if(!window.apps||!window.move_stars_up)
+    return setTimeout(get_started, 50);    
+
+  if($(window).scrollTop() > 100){
+    $("html, body").animate({ scrollTop: "0px" });
+    return setTimeout(get_started, 500);
+    return;
+  }
+
+  $(window).scrollTop(0)
+  move_stars_up();
+  setTimeout(function(){ $("#moon").addClass('move_up'); }, 100);
+  $(".block,.container").not('#main').hide();
+  $("#links").fadeOut('slow');
+  $("#tagline").animate({'marginTop':'-=100px', 'opacity':0}, 700, 'easeInOut', function(){$(this).remove(); });
+  $("#clouds1,#clouds2,#clouds3").stop().stop().animate({'margin-top':'+=30px'}, 1000);
+  $("#hp-spacer").remove();
+  apps.typing.onboarding.homepage.onboard();
+}
+
+function resized(){
+  $(".clouds").css("top", $(window).height() - 120);
+
+  if($(window).width() < 1000){
+    $("#moon").hide();
+  }else{
+    $("#moon").show();
+  }
+
+  if($(window).width() < 650){
+    $("#tagline").css({"width":"300px"})
+  }else{
+    $("#tagline").css({"width":"500px"})
+  }
+
+  if($(window).width() < 450){
+    $("#links").css({"top":"50px"})
+  }else{
+    $("#links").css({"top":"0px"})
+  }
+}
+
+var text_list = " for free!";
+
+function show_text(index){
+  var text = text_list.slice(0, index);
+  $("#text").html(text);
+  setTimeout(function(){ show_text(index+1); }, parseInt(Math.random()*600));
+}
+
+
+$(window).resize(resized);
+
+$(window).scroll(function(){
+  if($(window).scrollTop() > $(window).height()/2)
+    $("#nav").addClass('sticky');
+  else
+    $("#nav").removeClass('sticky');
+});
+
+</script>
+
+
+<div class="container">
+    <div class="row app-align-center">
+      <div class="col-sm-6 hidden-xs">
+        <div style="height:355px;">
+          <img src="https://i.imgur.com/AKmiWc1.png" class="img-responsive" style="position:absolute;z-index:-1;margin-left:-50px;">
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <h6 class="text-muted text-uppercase">ماذا يعني الطباعة باللمس</h6>
+        <h3 class="m-t-0">موقعنا هو الافضل لتعلم الكتابة</h3>
+        <p class="lead m-b-md">تطبيق ويب بفعالية عالية. موجه ل الافراد والمدارس.</p>
+
+        <a class="btn btn-primary get_started2" href="https://www.typingclub.com/get-started/">ابدا</a>
+        <br>
+      </div>
+    </div>
+</div>
+
+
+<div class="app-ribbon block-inverse" style="box-shadow: 0 0 30px rgba(0, 0, 0, .5);">
+  <div class="container">
+    <div class="row">
+    <div class="col-sm-4 col-xs-12">
+      <div class="row-fluid">
+        <div class="col-md-4 col-sm-5 col-xs-5">
+          <div class=""><i class=""></i></div>
+        </div>
+        <div class="col-md-6 col-sm-7 col-xs-7">
+          <div class=""><span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div class="row-fluid">
+        <div class="col-md-4 col-sm-5 col-xs-5">
+          <div class=""><i class=""></i></div>
+        </div>
+        <div class=" col-md-6 col-sm-7 col-xs-7">
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-4 col-xs-12">
+      <div class="row-fluid">
+        <div class="col-md-4 col-sm-5 col-xs-5">
+          <div class=""><i class=""></i></div>
+        </div>
+        <div class="col-md-6 col-sm-7 col-xs-7">
+          <div class=""></div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<div class="block block-secondary bg-gray three-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <h3>كيف يعمل الموقع ؟</h3>
+        <p>استمر بختم كل الدروس.عملية التعلم بسيطة لا تاخد وقتا , بضعة دقائق كل يوم تسهل حياتك.</p>
+      </div>
+      <div class="col-md-5 col-md-offset-2">
+        <h3>هل احتاج حسابا ؟</h3>
+        <p>لا تحتاج ل حساب لكي تجرب الموقع. لكن, اذا اردت ان تختم الدروس, يجب عليك ان تصنع حسابا. </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="block block-secondary app-block-marketing-grid">
+  <div class="container text-center">
+
+    <div class="row m-b-lg">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+        <h6 class="text-muted text-uppercase">الموقع من الداخل</h6>
+        <h3 class="m-t-0 m-b">الاسباب التي تجعلك تبدا الان</h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="./TypingClub_files/stars.svg" style="width:180px; padding-top:25px; ">
+        <p><strong>انها لعبة.</strong> عملية التعلم تكون من خلال تجربة شبيه باللعب.</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="./TypingClub_files/hands.svg" style="width:170px; ">
+        <p><strong>تعلم حركات اليد الصحيحة.</strong> سوف ترى جميع حركات اليد المخصصة لكل حرف.</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="./TypingClub_files/badge.svg" style="width:90px;">
+        <p><strong>مراحل وشارات عديدة</strong> كل هذه الاشباب ل تستمر, ولتبني ذاكرتك العضلية.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="./TypingClub_files/accessibility.svg" style="width:80px; ">
+        <p><strong>سهولة الوصول.</strong> من خلال اي جهاز محمول تستطيع الدخول الى الموقع.</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="./TypingClub_files/experience.svg" style="width:120px; ">
+        <p><strong>تجربة تفاعلية</strong> مدى واسع من طرق التعلم ك الالعاب والفيديوهات و طرق طباعة مختلفة, .</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="./TypingClub_files/keyboard.png" style="width:100px; ">
+        <p><strong>100% اون لاين</strong> كل ما تحتاج هو كيبورد .</p>
+      </div>
+    </div>
+
+    
+
+    <div style="text-align:center;">
+      <a href="https://www.typingclub.com/get-started/" class="btn btn-primary btn-lg get_started2">ابدا</a>
+    </div>
+
+  </div>
+</div>
+
+
+
+<div class="block block-secondary bg-gray three-details">
+  <div class="container">
+    
+</div>
+<script type="text/javascript" src="./TypingClub_files/check_browser_support.js.download"></script>
+
+
+
+    <!-- Start of HubSpot Embed Code -->
+    <script type="text/javascript" id="hs-script-loader" async="" defer="" src="./TypingClub_files/6272734.js.download"></script>
+    <!-- End of HubSpot Embed Code -->
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-6385201-8');
+        ga('set', 'anonymizeIp', true);
+        ga('send', 'pageview');
+    </script>
+    <script async="" src="./TypingClub_files/analytics.js.download"></script>
+
+
+
+
+<style>
+  #lessonplan_menu{
+    position:absolute;
+    top:-220px;
+    right:0;
+    font-size:25px;
+    width:150px;
+    height:75px;
+    overflow:hidden;
+  }
+  #lessonplan_menu:hover{
+    width:800px;
+  }
+  .lang_main_menu, .lang_sub_menu{
+    float:right;
+    color:white;
+    padding:8px;
+    width:150px;
+  }
+  a.lang_main_menu, a.lang_sub_menu{
+    text-decoration: none;
+  }
+  .lang_sub_menu:hover{
+    background:rgba(255, 255, 255, .05);
+  }
+  .land_main_menu:hover, {
+    cursor:default;
+  }
+  .lang_icon{
+    width:30px;
+    position:relative;
+    left:50%;
+    margin-left:-15px;
+    line-height: 1.2em;
+  }
+  .line{
+    height:1px;
+    position:absolute;
+    right:0;
+    background:#fff;
+    margin-top:8px;
+    width:0;
+  }
+  @keyframes underline {
+    from {width:0;}
+    to {width:600px;}
+  }
+  #lessonplan_menu:hover .line{
+    width:600px;
+    animation-name:underline;
+    animation-duration:.5s;
+  }
+  .menu_text{
+    font-size:.6em;
+    color:white;
+    padding:0;
+    margin:auto;
+    text-align:center;
+  }
+  p.def{
+    cursor:default;
+  }
+.homepage-form {
+  background-color: rgba(255, 255, 255, 0.4); 
+  padding: 35px; 
+  border-radius: 5px; 
+  margin: 50px 100px;
+}
+
+@media (max-width: 750px) {
+  .homepage-form {
+    margin: 0;
+  }
+}
+
+</style>
+<!-- <div id='lessonplan_menu'>
+  <a class='lang_main_menu'>
+    <div>
+          <img src="//static.typingclub.com/m/corp2/img/lang.svg" class='lang_icon' style='text-align:center;'/>
+          <p class='menu_text def'>Lesson plan</p>
+    </div>
+    <div class="line"></div>
+  </a>
+  <a class='lang_sub_menu' href="https://www.typingclub.com/dvorak">
+    <div>
+          <img src="//static.typingclub.com/m/corp2/img/keyboard.svg" class='lang_icon' style='text-align:center;'/>
+          <p class='menu_text'>Dvorak</p>
+    </div>
+  </a>
+  <a class='lang_sub_menu' href="https://www.typingclub.com/spanish">
+    <div>
+          <img src="//static.typingclub.com/m/corp2/img/espanol.svg" class='lang_icon' style='text-align:center;'/>
+          <p class='menu_text'>Spanish</p>
+    </div>
+  </a>
+  <a class='lang_sub_menu' href="https://www.typingclub.com/german">
+    <div>
+          <img src="//static.typingclub.com/m/corp2/img/espanol.svg" class='lang_icon' style='text-align:center;'/>
+          <p class='menu_text'>German</p>
+    </div>
+  </a>
+  <a class='lang_sub_menu' href="https://www.typingclub.com/one-hand-typing">
+    <div>
+          <img src="//static.typingclub.com/m/corp2/img/hand.svg" class='lang_icon' style='text-align:center;'/>
+          <p class='menu_text'>OneHand</p>
+    </div>
+  </a>
+</div> -->
+
+<script type="text/javascript" src="./TypingClub_files/jquery.min.js.download"></script>
+<script type="text/javascript" src="./TypingClub_files/toolkit.min.js.download"></script>
+
+
+
+
+</div><iframe scrolling="no" frameborder="0" allowtransparency="true" src="./TypingClub_files/widget_iframe.644279d1635fd969e87af94a98bd232b.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./TypingClub_files/saved_resource.html"></iframe></body></html>

@@ -757,7 +757,7 @@ const TypeBox = ({
                     <span
                       className={getPacingStyleButtonClassName(PACING_PULSE)}
                     >
-                      {PACING_PULSE}
+                      كلمة
                     </span>
                   </Tooltip>
                 </IconButton>
@@ -770,7 +770,7 @@ const TypeBox = ({
                     <span
                       className={getPacingStyleButtonClassName(PACING_CARET)}
                     >
-                      {PACING_CARET}
+                      حرف
                     </span>
                   </Tooltip>
                 </IconButton>

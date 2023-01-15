@@ -11,7 +11,8 @@ import {
 } from "../features/sound/sound";
 import useLocalPersistState from "../../hooks/useLocalPersistState";
 import TypeBox from "../features/TypeBox/TypeBox.js";
-import Header from "./Header.js";
+// import Header from "./Header.js";
+import Header from "../features/Header.js";
 // import "../../../src/App.css";
 const Lesson = ({ text, wordCount, id, name, mode }) => {
   const [theme, setTheme] = useState(() => {

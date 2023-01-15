@@ -226,7 +226,7 @@ export const GlobalStyles = createGlobalStyle`
 
 .dialog__confirm {
   --tw-bg-opacity: 1;
-  background-color: rgb(111, 255, 236);
+  background-color: #a8d7fe;
   border-radius: 0.75rem;
   font-weight: 500;
   margin-right: 1rem;

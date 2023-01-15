@@ -64,10 +64,14 @@ label {
 }nav{
     height: 50px;
     border: 0px solid #dfdfdf;
-    background-color: rgb(37, 150, 190);
+    background-color: #a8d7fe;
     align-self: top;
 }
-
+.userPage{
+  display: flex;
+  align-items: center;
+  
+}
 .div-header{
     width: 80%;
     height: 100%;

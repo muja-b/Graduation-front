@@ -17,7 +17,7 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
-import Header from "./Header";
+import Header from "../features/Header";
 const User = () => {
   const [user, setUser] = useState([]);
   let url = window.location.href.split("/");
@@ -87,261 +87,265 @@ const User = () => {
 
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          // flexDirection: "row-reverse",
-          backgroundColor: "rgb(240, 228, 228)",
-          width: "1200px",
-          height: "800px",
-        }}
-      >
-        <MDBContainer
+      <Header></Header>
+      <div className="userPage">
+        <div
           style={{
-            display: "flex",
-            flexDirection: "row-reverse",
-            width: "100%",
-            height: "100%",
+            display: "fixed",
+            backgroundColor: "rgb(240, 228, 228)",
+            width: "1200px",
+            height: "800px",
+            alignItems: "center",
+            right: "200px",
           }}
         >
-          <MDBCol>
-            <MDBRow>
-              <MDBCard style={{ width: "300px", height: "400px" }}>
-                <MDBCardBody className="text-center">
-                  <MDBCardImage
-                    src={user.profilePicture}
-                    alt="avatar"
-                    className="rounded-circle"
-                    style={{ width: "200px" }}
-                    fluid
-                  />
-                  <p
-                    className="text-muted mb-1"
-                    style={{ fontSize: "30px", marginTop: "10px" }}
-                  >
-                    {user.firstName + " "}
+          <MDBContainer
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <MDBCol>
+              <MDBRow>
+                <MDBCard style={{ width: "300px", height: "400px" }}>
+                  <MDBCardBody className="text-center">
+                    <MDBCardImage
+                      src={user.profilePicture}
+                      alt="avatar"
+                      className="rounded-circle"
+                      style={{ width: "200px" }}
+                      fluid
+                    />
+                    <p
+                      className="text-muted mb-1"
+                      style={{ fontSize: "30px", marginTop: "10px" }}
+                    >
+                      {user.firstName + " "}
 
-                    {user.lastName}
-                  </p>
-                  <p
-                    className="text-muted mb-4"
-                    style={{ fontSize: "20px", marginTop: "10px" }}
-                  >
-                    {user.email}
-                  </p>
-                  <div className="d-flex justify-content-center mb-2">
-                    <MDBBtn outline className="ms-1">
-                      Message
-                    </MDBBtn>
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBRow>
-            <MDBRow>
-              <MDBCard style={{ width: "300px", height: "300px" }}>
-                <MDBCardBody className="text-center">
-                  <p
-                    className="text-muted mb-4"
-                    style={{ fontSize: "40px", marginTop: "10px" }}
-                  >
-                    اقصى سرعة:{ConvertToArabicNumbers(wpm)}
-                  </p>
-
-                  <p
-                    className="text-muted mb-4"
-                    style={{ fontSize: "40px", marginTop: "10px" }}
-                  >
-                    ٪التقدم:{ConvertToArabicNumbers(progress)}
-                  </p>
-                  <p
-                    className="text-muted mb-4"
-                    style={{ fontSize: "40px", marginTop: "10px" }}
-                  >
-                    عدد الدروس:{ConvertToArabicNumbers(progress)}
-                  </p>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBRow>
-          </MDBCol>
-          <MDBCol>
-            <MDBRow>
-              <MDBCol>
-                <MDBCard
-                  style={{
-                    width: "750px",
-                    height: "100px",
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                  }}
-                >
-                  <div
-                    className="text-muted mb-4"
-                    style={{
-                      fontSize: "20px",
-                      marginTop: "10px",
-                      width: "700px",
-                      textAlign: "right",
-                      marginRight: "15px",
-                    }}
-                  >
-                    {user.description}
-                  </div>
+                      {user.lastName}
+                    </p>
+                    <p
+                      className="text-muted mb-4"
+                      style={{ fontSize: "20px", marginTop: "10px" }}
+                    >
+                      {user.email}
+                    </p>
+                    <div className="d-flex justify-content-center mb-2">
+                      <MDBBtn outline className="ms-1">
+                        Message
+                      </MDBBtn>
+                    </div>
+                  </MDBCardBody>
                 </MDBCard>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol>
-                <MDBCard
-                  style={{
-                    width: "750px",
-                    height: "270px",
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                  }}
-                >
-                  <div
+              </MDBRow>
+              <MDBRow>
+                <MDBCard style={{ width: "300px", height: "300px" }}>
+                  <MDBCardBody className="text-center">
+                    <p
+                      className="text-muted mb-4"
+                      style={{ fontSize: "40px", marginTop: "10px" }}
+                    >
+                      اقصى سرعة:{ConvertToArabicNumbers(wpm)}
+                    </p>
+
+                    <p
+                      className="text-muted mb-4"
+                      style={{ fontSize: "40px", marginTop: "10px" }}
+                    >
+                      ٪التقدم:{ConvertToArabicNumbers(progress)}
+                    </p>
+                    <p
+                      className="text-muted mb-4"
+                      style={{ fontSize: "40px", marginTop: "10px" }}
+                    >
+                      عدد الدروس:{ConvertToArabicNumbers(progress)}
+                    </p>
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBRow>
+            </MDBCol>
+            <MDBCol>
+              <MDBRow>
+                <MDBCol>
+                  <MDBCard
                     style={{
-                      position: "relative",
+                      width: "750px",
+                      height: "100px",
+                      display: "flex",
+                      flexDirection: "row-reverse",
                     }}
                   >
-                    <h1
+                    <div
+                      className="text-muted mb-4"
                       style={{
-                        position: "relative",
-                        marginRight: "300px",
-                        marginTop: "15px",
+                        fontSize: "20px",
+                        marginTop: "10px",
+                        width: "700px",
+                        textAlign: "right",
+                        marginRight: "15px",
                       }}
                     >
-                      اقصى سرعة
-                    </h1>
-                  </div>
-                  <table
+                      {user.description}
+                    </div>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+              <MDBRow>
+                <MDBCol>
+                  <MDBCard
                     style={{
-                      marginleft: "15px",
-                      position: "absolute",
-                      marginTop: "75px",
+                      width: "750px",
+                      height: "270px",
+                      display: "flex",
+                      flexDirection: "row-reverse",
                     }}
                   >
-                    <tr>
-                      <th style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={s120}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </th>
-                      <th style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={s90}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </th>
-                      <th style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={s60}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </th>
-                      <th style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={s30}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </th>
-                    </tr>
-                  </table>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol>
-                <MDBCard
-                  style={{
-                    width: "750px",
-                    height: "270px",
-                    display: "flex",
-                    flexDirection: "row-reverse",
-                    marginRight: "20px",
-                  }}
-                >
-                  <div
-                    style={{
-                      position: "relative",
-                    }}
-                  >
-                    <h1
+                    <div
                       style={{
                         position: "relative",
-                        marginRight: "350px",
-                        marginTop: "15px",
                       }}
                     >
-                      تقدم
-                    </h1>
-                  </div>
-
-                  <table
+                      <h1
+                        style={{
+                          position: "relative",
+                          marginRight: "300px",
+                          marginTop: "15px",
+                        }}
+                      >
+                        اقصى سرعة
+                      </h1>
+                    </div>
+                    <table
+                      style={{
+                        marginleft: "15px",
+                        position: "absolute",
+                        marginTop: "75px",
+                      }}
+                    >
+                      <tr>
+                        <th style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={s120}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </th>
+                        <th style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={s90}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </th>
+                        <th style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={s60}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </th>
+                        <th style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={s30}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </th>
+                      </tr>
+                    </table>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+              <MDBRow>
+                <MDBCol>
+                  <MDBCard
                     style={{
-                      marginleft: "15px",
-                      position: "absolute",
-                      marginTop: "75px",
+                      width: "750px",
+                      height: "270px",
+                      display: "flex",
+                      flexDirection: "row-reverse",
+                      marginRight: "20px",
                     }}
                   >
-                    <tr></tr>
-                    <tr>
-                      <td style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={p100}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </td>
-                      <td style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={p75}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </td>
-                      <td style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={p50}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </td>
-                      <td style={{ padding: "0 20px 0 15px" }}>
-                        <MDBCardImage
-                          src={p25}
-                          alt="avatar"
-                          className="rounded-circle"
-                          style={{ width: "150px" }}
-                          fluid
-                        />
-                      </td>
-                    </tr>
-                  </table>
-                </MDBCard>
-              </MDBCol>
-            </MDBRow>
-          </MDBCol>
-        </MDBContainer>
+                    <div
+                      style={{
+                        position: "relative",
+                      }}
+                    >
+                      <h1
+                        style={{
+                          position: "relative",
+                          marginRight: "350px",
+                          marginTop: "15px",
+                        }}
+                      >
+                        تقدم
+                      </h1>
+                    </div>
+
+                    <table
+                      style={{
+                        marginleft: "15px",
+                        position: "absolute",
+                        marginTop: "75px",
+                      }}
+                    >
+                      <tr></tr>
+                      <tr>
+                        <td style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={p100}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </td>
+                        <td style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={p75}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </td>
+                        <td style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={p50}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </td>
+                        <td style={{ padding: "0 20px 0 15px" }}>
+                          <MDBCardImage
+                            src={p25}
+                            alt="avatar"
+                            className="rounded-circle"
+                            style={{ width: "150px" }}
+                            fluid
+                          />
+                        </td>
+                      </tr>
+                    </table>
+                  </MDBCard>
+                </MDBCol>
+              </MDBRow>
+            </MDBCol>
+          </MDBContainer>
+        </div>
       </div>
     </div>
   );

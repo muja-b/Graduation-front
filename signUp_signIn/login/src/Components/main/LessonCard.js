@@ -5,23 +5,26 @@ const LessonCard = ({ name, text, image, id }) => {
   useEffect(() => {
     requestUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  async function getuserid(){
-    const res=await fetch("https://localhost:7097/TouchTyping/Authentication/Validate",
-    {
-      method: "GET",
+  async function getuserid() {
+    const res = await fetch(
+      "https://localhost:7097/TouchTyping/Authentication/Validate",
+      {
+        method: "GET",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': 'Bearer '+JSON.parse(localStorage.getItem('token')).token
+          Authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("token")).token,
         },
-    });
-    const user=await res.json();
-    console.log(user)
-    return user
+      }
+    );
+    const user = await res.json();
+    console.log(user);
+    return user;
   }
   async function requestUser() {
-      const user=await getuserid()
-      const userid=user.id
+    const user = await getuserid();
+    const userid = user.id;
     const res = await fetch(`http://localhost:8081/user/${userid}`, {
       method: "GET",
       mode: "cors",
@@ -49,45 +52,45 @@ const LessonCard = ({ name, text, image, id }) => {
     });
   };
 
-  if (id <= user.progress) {
-    return (
-      <Link to={`/details/${id}`} className="card">
-        <div>
-          <table width="100%">
-            <tr>
-              <th>
-                <h3>{ConvertToArabicNumbers(id)}</h3>
-              </th>
-              <th>
-                <img src={lock} alt={name} className="img-lock" />
-              </th>
-            </tr>
-          </table>
-          <img src={image} alt={name} className="img-blablabla" />
-          <div className="container">
-            <h4>{name}</h4>
-          </div>
-        </div>
-      </Link>
-    );
-  } else
-    return (
-      <div className="card">
+  // if (id <= user.progress) {
+  return (
+    <Link to={`/details/${id}`} className="card">
+      <div>
         <table width="100%">
           <tr>
             <th>
               <h3>{ConvertToArabicNumbers(id)}</h3>
             </th>
-            <th className="th-left">
+            <th>
               <img src={lock} alt={name} className="img-lock" />
             </th>
           </tr>
         </table>
         <img src={image} alt={name} className="img-blablabla" />
         <div className="container">
-          <h4>{name}</h4>
+          <h4 style={{ textAlign: "center" }}>{name}</h4>
         </div>
       </div>
-    );
+    </Link>
+  );
+  // } else
+  //   return (
+  //     <div className="card">
+  //       <table width="100%">
+  //         <tr>
+  //           <th>
+  //             <h3>{ConvertToArabicNumbers(id)}</h3>
+  //           </th>
+  //           <th className="th-left">
+  //             <img src={lock} alt={name} className="img-lock" />
+  //           </th>
+  //         </tr>
+  //       </table>
+  //       <img src={image} alt={name} className="img-blablabla" />
+  //       <div className="container">
+  //         <h4 style={{ fontWeight: "bold" }}>{name}</h4>
+  //       </div>
+  //     </div>
+  //   );
 };
 export default LessonCard;

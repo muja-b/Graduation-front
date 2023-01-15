@@ -6,22 +6,20 @@
   
   body {
     margin-top: 100px;
-    display: flex;
+    display: fixed;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-image: url("https://wallpapercave.com/wp/wp4718605.png");
+
     z-index: -1;
     overflow-anchor: none;
   }
-  
   .search-params {
     width: 1300px;
     display: flex;
     flex-direction: row-reverse;
     margin: 0 auto;
-    margin-top:100px;
   }
 
   .search-params form {
@@ -171,7 +169,7 @@
 
 .dialog__confirm {
   --tw-bg-opacity: 1;
-  background-color: rgb(111, 255, 236);
+  background-color: #a8d7fe;
   border-radius: 0.75rem;
   font-weight: 500;
   margin-right: 1rem;
@@ -225,7 +223,7 @@
     border-bottom: #333 10px inherit;
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     transition: 0.3s;
-    background-color: white;
+    background-color: #ececec;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
   .room:hover {
@@ -286,7 +284,7 @@
     box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
     transition: 0.3s;
     background-color: white;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
   }
 
   .card:hover {
@@ -318,7 +316,7 @@
   .card h4 {
     white-space: nowrap;
     font-weight: normal;
-    font-size: 25px;
+    font-size: 18px;
     color: rgb(0, 0, 0);
     width: 90%;
     position: relative;
@@ -357,6 +355,9 @@
 
   .container {
     padding: 2px 16px;
+    align-items: center;
+    text-align: center;
+    font-weight: bold; 
   }
 
   .head{

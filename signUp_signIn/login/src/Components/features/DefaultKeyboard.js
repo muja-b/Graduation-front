@@ -6,6 +6,7 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import useSound from "use-sound";
 import { SOUND_MAP } from "../features/sound/sound";
 import Header from "../main/Header";
+import { iconButtonClasses } from "@mui/material";
 
 const DefaultKeyboard = ({ letters, soundType, soundMode }) => {
   const keyboardRef = useRef();
@@ -87,9 +88,17 @@ const DefaultKeyboard = ({ letters, soundType, soundMode }) => {
     return "SPACEKEY VIBRATE";
   };
 
+  const ConvertToArabicNumbers = (num) => {
+    const arabicNumbers =
+      "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
+    return new String(num).replace(/[0123456789]/g, (d) => {
+      return arabicNumbers[d];
+    });
+  };
+
   return (
     <div>
-      <div className="keyboard">
+      <div className="keyboard" style={{ text: "black" }}>
         <input
           className="hidden-input"
           onBlur={handleInputBlur}
@@ -98,7 +107,7 @@ const DefaultKeyboard = ({ letters, soundType, soundMode }) => {
           ref={keyboardRef}
         ></input>
         <ul className="row row-0">
-          <div className={getClassName("ذ")} id="ذ">
+          <div className={getClassName("ذ")} id="ذ" style={{ text: "black" }}>
             ذ
           </div>
           <div className={getClassName("1")} id="1">
@@ -250,12 +259,16 @@ const DefaultKeyboard = ({ letters, soundType, soundMode }) => {
         </ul>{" "}
       </div>
       <div className="keyboard-stats">
-        <Box display="flex" flexDirection="row">
-          <h3>Accuracy: {accuracy} %</h3>
+        <Box display="flex" flexDirection="row-reverse">
+          <h3> ٪الدقة: {ConvertToArabicNumbers(accuracy)} </h3>
           <h3>
-            <span className="CorrectKeyDowns">{correctCount}</span>
+            <span className="CorrectKeyDowns">
+              {ConvertToArabicNumbers(correctCount)}
+            </span>
             {"  "} {"/"} {"  "}
-            <span className="IncorrectKeyDowns">{incorrectCount}</span>
+            <span className="IncorrectKeyDowns">
+              {ConvertToArabicNumbers(incorrectCount)}
+            </span>
           </h3>
           <IconButton
             aria-label="restart"

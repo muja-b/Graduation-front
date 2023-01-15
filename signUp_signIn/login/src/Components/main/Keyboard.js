@@ -11,6 +11,7 @@ import {
   DEFAULT_SOUND_TYPE_KEY,
 } from "../features/sound/sound";
 import useLocalPersistState from "../../hooks/useLocalPersistState";
+import Header from "../features/Header.js";
 // import "../../../src/App.css";
 const Keyboard = ({ letters }) => {
   const [theme, setTheme] = useState(() => {
@@ -61,9 +62,10 @@ const Keyboard = ({ letters }) => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header></Header>
       <div className="canvas">
         <GlobalStyles></GlobalStyles>
-        <div>
+        <div style={{ text: "black" }}>
           <DefaultKeyboard
             letters={letters}
             soundMode={soundMode}

@@ -31,7 +31,7 @@ const Rooms = () => {
       <NewRoom show={show}></NewRoom>
       <div
         className="search-params"
-        style={{ position: "absolute", top: "50px", right: "200px" }}
+        style={{ position: "absolute", top: "250px", right: "200px" }}
       >
         <button
           onClick={() => {

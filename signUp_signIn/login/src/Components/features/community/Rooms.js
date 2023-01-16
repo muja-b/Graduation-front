@@ -6,6 +6,19 @@ const Rooms = () => {
   const [lessons, setlessons] = useState([]);
   const [show, setShow] = useState(false);
 
+  async function showRooms() {
+    const res = await fetch(`http://localhost:8081/com/mylessons?id=1`, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const json = await res.json();
+
+    setlessons(json.lessons);
+  }
   useEffect(() => {
     addRoom();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -37,10 +50,20 @@ const Rooms = () => {
           onClick={() => {
             setShow(true);
           }}
-          style={{ position: "absolute", top: "-60px", left: "200px" }}
+          style={{ position: "absolute", top: "-60px", left: "50px" }}
         >
           {" "}
           درس جديد
+        </button>
+
+        <button
+          onClick={() => {
+            showRooms();
+          }}
+          style={{ position: "absolute", top: "-60px", left: "200px" }}
+        >
+          {" "}
+          دروسي
         </button>
         <div
           style={{

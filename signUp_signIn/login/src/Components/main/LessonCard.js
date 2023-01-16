@@ -52,45 +52,45 @@ const LessonCard = ({ name, text, image, id }) => {
     });
   };
 
-  // if (id <= user.progress) {
-  return (
-    <Link to={`/details/${id}`} className="card">
-      <div>
+  if (id <= user.progress) {
+    return (
+      <Link to={`/details/${id}`} className="card">
+        <div>
+          <table width="100%">
+            <tr>
+              <th>
+                <h3>{ConvertToArabicNumbers(id)}</h3>
+              </th>
+              <th>
+                <img src={lock} alt={name} className="img-lock" />
+              </th>
+            </tr>
+          </table>
+          <img src={image} alt={name} className="img-blablabla" />
+          <div className="container">
+            <h4 style={{ textAlign: "center" }}>{name}</h4>
+          </div>
+        </div>
+      </Link>
+    );
+  } else
+    return (
+      <div className="card">
         <table width="100%">
           <tr>
             <th>
               <h3>{ConvertToArabicNumbers(id)}</h3>
             </th>
-            <th>
+            <th className="th-left">
               <img src={lock} alt={name} className="img-lock" />
             </th>
           </tr>
         </table>
         <img src={image} alt={name} className="img-blablabla" />
         <div className="container">
-          <h4 style={{ textAlign: "center" }}>{name}</h4>
+          <h4 style={{ fontWeight: "bold" }}>{name}</h4>
         </div>
       </div>
-    </Link>
-  );
-  // } else
-  //   return (
-  //     <div className="card">
-  //       <table width="100%">
-  //         <tr>
-  //           <th>
-  //             <h3>{ConvertToArabicNumbers(id)}</h3>
-  //           </th>
-  //           <th className="th-left">
-  //             <img src={lock} alt={name} className="img-lock" />
-  //           </th>
-  //         </tr>
-  //       </table>
-  //       <img src={image} alt={name} className="img-blablabla" />
-  //       <div className="container">
-  //         <h4 style={{ fontWeight: "bold" }}>{name}</h4>
-  //       </div>
-  //     </div>
-  //   );
+    );
 };
 export default LessonCard;

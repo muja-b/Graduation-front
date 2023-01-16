@@ -11,6 +11,7 @@ const RoomResults = ({ lessons }) => {
           id={lesson.id}
           ownerId={lesson.ownerId}
           ownerName={lesson.ownerName}
+          finished={lesson.finished}
         />
       ))}
     </div>

@@ -3,15 +3,22 @@
     color: #333;
     overflow-anchor: none;
   }
-  
+  .edit{
+    
+      width: 20px;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+  }
+  .edit:hover{
+    cursor: pointer;
+  }
   body {
-    margin-top: 100px;
     display: fixed;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-
     z-index: -1;
     overflow-anchor: none;
   }

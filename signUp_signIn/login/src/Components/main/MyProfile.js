@@ -18,7 +18,7 @@ import {
 } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import Header from "../features/Header";
-const User = () => {
+const MyProfile = () => {
   const [user, setUser] = useState([]);
   let url = window.location.href.split("/");
   let id = url[4];
@@ -27,7 +27,7 @@ const User = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function requestUser() {
-    const res = await fetch(`http://localhost:8081/user/${id}`, {
+    const res = await fetch(`http://localhost:8081/user/1`, {
       method: "GET",
       mode: "cors",
       headers: {
@@ -64,16 +64,16 @@ const User = () => {
   let p100 = process.env.PUBLIC_URL + `/progress/100c.png`;
 
   let progress = user.progress;
-  if (progress >= 25) {
+  if (progress / 1.26 >= 25) {
     p25 = process.env.PUBLIC_URL + `/progress/25o.png`;
   }
-  if (progress >= 50) {
+  if (progress / 1.26 >= 50) {
     p50 = process.env.PUBLIC_URL + `/progress/50o.png`;
   }
-  if (progress >= 75) {
+  if (progress / 1.26 >= 75) {
     p75 = process.env.PUBLIC_URL + `/progress/75o.png`;
   }
-  if (progress >= 100) {
+  if (progress / 1.26 >= 100) {
     p100 = process.env.PUBLIC_URL + `/progress/100o.png`;
   }
 
@@ -154,7 +154,8 @@ const User = () => {
                       className="text-muted mb-4"
                       style={{ fontSize: "40px", marginTop: "10px" }}
                     >
-                      ٪التقدم:{ConvertToArabicNumbers(progress)}
+                      ٪التقدم:
+                      {ConvertToArabicNumbers(Math.round(progress / 1.26))}
                     </p>
                     <p
                       className="text-muted mb-4"
@@ -187,7 +188,23 @@ const User = () => {
                         marginRight: "15px",
                       }}
                     >
-                      {user.description}
+                      <img
+                        src={process.env.PUBLIC_URL + `/image/edit.png`}
+                        alt="edit"
+                        className="edit"
+                      />
+                      <p
+                        style={{
+                          fontSize: "20px",
+                          marginTop: "10px",
+                          width: "700px",
+                          textAlign: "right",
+                          marginRight: "15px",
+                        }}
+                      >
+                        {" "}
+                        {user.description}
+                      </p>
                     </div>
                   </MDBCard>
                 </MDBCol>
@@ -289,7 +306,7 @@ const User = () => {
                           marginTop: "15px",
                         }}
                       >
-                        تقدم
+                        التقدم
                       </h1>
                     </div>
 
@@ -350,4 +367,4 @@ const User = () => {
     </div>
   );
 };
-export default User;
+export default MyProfile;

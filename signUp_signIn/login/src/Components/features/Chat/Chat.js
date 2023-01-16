@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-// import "./chat.css";
+import "./chat.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";

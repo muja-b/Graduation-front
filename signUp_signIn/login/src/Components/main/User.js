@@ -64,16 +64,16 @@ const User = () => {
   let p100 = process.env.PUBLIC_URL + `/progress/100c.png`;
 
   let progress = user.progress;
-  if (progress >= 25) {
+  if (progress / 1.26 >= 25) {
     p25 = process.env.PUBLIC_URL + `/progress/25o.png`;
   }
-  if (progress >= 50) {
+  if (progress / 1.26 >= 50) {
     p50 = process.env.PUBLIC_URL + `/progress/50o.png`;
   }
-  if (progress >= 75) {
+  if (progress / 1.26 >= 75) {
     p75 = process.env.PUBLIC_URL + `/progress/75o.png`;
   }
-  if (progress >= 100) {
+  if (progress / 1.26 >= 100) {
     p100 = process.env.PUBLIC_URL + `/progress/100o.png`;
   }
 
@@ -154,7 +154,8 @@ const User = () => {
                       className="text-muted mb-4"
                       style={{ fontSize: "40px", marginTop: "10px" }}
                     >
-                      ٪التقدم:{ConvertToArabicNumbers(progress)}
+                      ٪التقدم:
+                      {ConvertToArabicNumbers(Math.round(progress / 1.26))}
                     </p>
                     <p
                       className="text-muted mb-4"

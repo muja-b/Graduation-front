@@ -13,6 +13,7 @@
   .edit:hover{
     cursor: pointer;
   }
+
   body {
     display: fixed;
     justify-content: center;

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-// import "./chat.css";
+import "./chat.css";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
@@ -92,7 +92,7 @@ function ChatRoom() {
         />
 
         <button type="submit" disabled={!formValue}>
-          🕊️
+          Send
         </button>
       </form>
     </fragment>
@@ -108,7 +108,7 @@ function ChatMessage(props) {
       <div className={`message ${messageClass}`}>
         <img
           src={
-            photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
+            photoURL || "https://i.imgur.com/DCNuaZj.png"
           }
         />
         <p>{text}</p>

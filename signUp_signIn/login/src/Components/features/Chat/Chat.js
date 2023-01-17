@@ -92,7 +92,7 @@ function ChatRoom() {
         />
 
         <button type="submit" disabled={!formValue}>
-          🕊️
+          Send
         </button>
       </form>
     </fragment>
@@ -108,7 +108,7 @@ function ChatMessage(props) {
       <div className={`message ${messageClass}`}>
         <img
           src={
-            photoURL || "https://api.adorable.io/avatars/23/abott@adorable.png"
+            photoURL || "https://i.imgur.com/DCNuaZj.png"
           }
         />
         <p>{text}</p>

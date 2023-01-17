@@ -56,8 +56,9 @@ const Posts = () => {
                 type="text"
                 id="title"
                 name="title"
+                placeholder="العنوان"
                 style={{
-                  width: "200px",
+                  width: "800px",
                   height: "50px",
                   textAlign: "right",
                   marginLeft: "25px",
@@ -66,18 +67,6 @@ const Posts = () => {
                 onChange={(e) => setTitle(e.target.value)}
               ></input>
             </th>
-
-            <th>العونان</th>
-            <th>
-              <button
-                onClick={() => {
-                  addPost();
-                  window.location.reload();
-                }}
-              >
-                انشر
-              </button>
-            </th>
           </tr>
           <tr>
             <textarea
@@ -85,14 +74,24 @@ const Posts = () => {
               type="text"
               id="content"
               name="content"
+              placeholder="بماذا تفكر"
               style={{
                 width: "800px",
                 height: "150px",
                 textAlign: "right",
                 marginLeft: "25px",
+                marginBottom:"30px"
               }}
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
+            <button
+                onClick={() => {
+                  addPost();
+                  window.location.reload();
+                }}
+              >
+                انشر
+              </button>
           </tr>
           {posts.map((post) => (
             <tr>

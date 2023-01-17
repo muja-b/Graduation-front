@@ -38,6 +38,7 @@ import {
 } from "../../../constants/Constants";
 import { SOUND_MAP } from "../sound/sound";
 import WinBox from "../../main/WinBox";
+import TestWinBox from "../../main/winTestBox";
 const TypeBox = ({
   textInputRef,
   isFocusedMode,
@@ -145,6 +146,7 @@ const TypeBox = ({
   );
 
   const [winBox, setWinBox] = useState(false);
+  const [testBox, setTestBox] = useState(false);
   // set up timer state
   const [countDown, setCountDown] = useState(countDownConstant);
   const [intervalId, setIntervalId] = useState(null);
@@ -322,6 +324,9 @@ const TypeBox = ({
             if (accuracy === 100) {
               if (mode === 1) {
                 setWinBox(true);
+              }
+              if (mode === 3) {
+                setTestBox(true);
               }
             }
             if (mode === 2) {
@@ -644,6 +649,7 @@ const TypeBox = ({
         statsCharCount={statsCharCount}
         id={id}
       ></WinBox>
+      <TestWinBox show={testBox} wpm={Math.round(wpm)}></TestWinBox>
       <CapsLockSnackbar open={capsLocked}></CapsLockSnackbar>
       {language === ENGLISH_MODE && (
         <div className="type-box">
@@ -704,7 +710,7 @@ const TypeBox = ({
                   <RestartAltIcon />
                 </Tooltip>
               </IconButton>
-              {menuEnabled && (
+              {/* {menuEnabled && (
                 <>
                   <IconButton
                     onClick={() => {
@@ -743,7 +749,7 @@ const TypeBox = ({
                     </span>
                   </IconButton>
                 </>
-              )}
+              )} */}
             </Box>
 
             {menuEnabled && (
@@ -780,7 +786,7 @@ const TypeBox = ({
         </div>
         <div className="keyboard-img">
           <img
-            style={{ width: "800px" }}
+            style={{ width: "800px", hiegth: "700px" }}
             src={
               process.env.PUBLIC_URL +
               `/image/${

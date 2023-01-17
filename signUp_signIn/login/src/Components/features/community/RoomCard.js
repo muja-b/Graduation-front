@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-const RoomCard = ({ name, text, id, ownerId, ownerName }) => {
+const RoomCard = ({ name, text, id, ownerId, ownerName, finished }) => {
   const ConvertToArabicNumbers = (num) => {
     const arabicNumbers =
       "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
@@ -19,14 +19,18 @@ const RoomCard = ({ name, text, id, ownerId, ownerName }) => {
         >
           <tr style={{}}>
             <th style={{ textDecoration: "none" }}>
-              {" "}
+              {"              "}
+              {"   "}التكرار:{ConvertToArabicNumbers(id)}
+              &nbsp;&nbsp;&nbsp;&nbsp;
               <Link
                 style={{ textDecoration: "none", marginLeft: "10px" }}
                 to={`/user/${ownerId}`}
               >
+                {"              "}
                 {ownerName}
               </Link>
             </th>
+            <th style={{ textAlign: "left", marginRight: "200px" }}></th>
             <th style={{ position: "absolute", right: "120px" }}>
               <th>{name}</th>
               <th>{":" + ConvertToArabicNumbers(id)}</th>

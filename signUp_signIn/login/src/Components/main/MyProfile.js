@@ -18,23 +18,70 @@ import {
 } from "mdb-react-ui-kit";
 import { useState, useEffect } from "react";
 import Header from "../features/Header";
-const User = () => {
+const MyProfile = () => {
   const [user, setUser] = useState([]);
+  const [show, setShow] = useState("none");
+  const [text, setText] = useState([]);
+  const [pic, setPic] = useState([]);
+  const [showPic, setShowPic] = useState("none");
   let url = window.location.href.split("/");
   let id = url[4];
   useEffect(() => {
     requestUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const handleKeyDownPic = (event) => {
+    if (event.key === "Enter") {
+      editPic();
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      editPic();
+    }
+  };
+  async function editPic() {
+    const res = await fetch(
+      `http://localhost:8081/user/1/updateProfilePic?profilePic=${pic}`,
+      {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = await res.json();
+    console.log(json);
+    setUser(json);
+    window.location.reload();
+  }
+  async function editDis() {
+    const res = await fetch(
+      `http://localhost:8081/user/1/updateDescription?Description=${text}`,
+      {
+        method: "PUT",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const json = await res.json();
+    console.log(json);
+    setUser(json);
+    window.location.reload();
+  }
 
   async function requestUser() {
-    const res = await fetch(`http://localhost:8081/user/${id}`, {
+    const res = await fetch(`http://localhost:8081/user/1`, {
       method: "GET",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
     });
-
     const json = await res.json();
     console.log(json);
     setUser(json);
@@ -76,7 +123,14 @@ const User = () => {
   if (progress / 1.26 >= 100) {
     p100 = process.env.PUBLIC_URL + `/progress/100o.png`;
   }
-
+  async function editDescreption() {
+    if (show === "none") setShow("block");
+    if (show === "block") setShow("none");
+  }
+  async function editPicture() {
+    if (showPic === "none") setShowPic("block");
+    if (showPic === "block") setShowPic("none");
+  }
   const ConvertToArabicNumbers = (num) => {
     const arabicNumbers =
       "\u0660\u0661\u0662\u0663\u0664\u0665\u0666\u0667\u0668\u0669";
@@ -111,6 +165,21 @@ const User = () => {
               <MDBRow>
                 <MDBCard style={{ width: "300px", height: "400px" }}>
                   <MDBCardBody className="text-center">
+                    <img
+                      src={process.env.PUBLIC_URL + `/image/edit.png`}
+                      alt="edit"
+                      className="edit"
+                      onClick={() => {
+                        editPicture();
+                      }}
+                    />
+                    <input
+                      name="des"
+                      id="des"
+                      onChange={(e) => setPic(e.target.value)}
+                      onKeyDown={handleKeyDownPic}
+                      style={{ display: showPic }}
+                    ></input>
                     <MDBCardImage
                       src={user.profilePicture}
                       alt="avatar"
@@ -188,7 +257,34 @@ const User = () => {
                         marginRight: "15px",
                       }}
                     >
-                      {user.description}
+                      <img
+                        src={process.env.PUBLIC_URL + `/image/edit.png`}
+                        alt="edit"
+                        className="edit"
+                        onClick={() => {
+                          editDescreption();
+                        }}
+                      />
+                      <input
+                        name="des"
+                        id="des"
+                        onChange={(e) => setText(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        style={{ display: show }}
+                      ></input>
+
+                      <p
+                        style={{
+                          fontSize: "20px",
+                          marginTop: "10px",
+                          width: "700px",
+                          textAlign: "right",
+                          marginRight: "15px",
+                        }}
+                      >
+                        {" "}
+                        {user.description}
+                      </p>
                     </div>
                   </MDBCard>
                 </MDBCol>
@@ -290,7 +386,7 @@ const User = () => {
                           marginTop: "15px",
                         }}
                       >
-                        تقدم
+                        التقدم
                       </h1>
                     </div>
 
@@ -351,4 +447,4 @@ const User = () => {
     </div>
   );
 };
-export default User;
+export default MyProfile;
